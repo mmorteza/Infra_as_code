@@ -9,6 +9,7 @@
     name: "{{ item.name }}"
     state: present
     groups: "{{ item.groups | default('sudo') }}"
+    append: yes
   loop: "{{ ssh_users }}"
 
 - name: Upload authorized keys
