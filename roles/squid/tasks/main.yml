@@ -1,0 +1,38 @@
+- name: Install Squid and dependencies
+  apt:
+    name: squid
+    state: present
+    update_cache: yes
+
+- name: Install apache2-utils for hhtpasswd utility
+  apt:
+    name: apache2-utils
+    state: present
+
+- name: Ensure htpasswd file for squid exists
+  copy:
+    src: squid_passwd
+    dest: /etc/squid/squid_passwd
+    owner: proxy
+    mode: '0600'
+
+- name: Configure Squid
+  template:
+    src: squid.conf.j2
+    dest: /etc/squid/squid.conf
+  notify: Restart Squid
+
+- name: Start and enable Squid service
+  systemd:
+    name: squid
+    state: started
+    enabled: true
+
+- name: Enable IP forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    state: present
+    reload: yes
+
+

@@ -1,0 +1,10 @@
+---
+- name: Install and Configure squid and its dependecies
+  hosts: all
+  become: true
+  vars:
+    ansible_become_password: "cisco123"
+  roles:
+    - ssh
+    - nft
+    - squid

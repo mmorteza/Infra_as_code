@@ -1,0 +1,42 @@
+# This file is managed by Ansible all manual changed will override
+# /etc/nftables.conf
+flush ruleset
+
+# Load all rules from the nftables.d directory
+include "/etc/nft/nftables.d/*.rules"
+
+table inet filter {
+
+    chain input {
+        type filter hook input priority 0; policy drop;
+    {% if input_rules is defined and input_rules %}
+    {% for rule in input_rules %}
+        {{ rule }}
+    {% endfor %}
+        {% else %}
+            # No input rules defined
+        {% endif %}
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+{% if forward_rules is defined and forward_rules %}
+    {% for rule in forward_rules %}
+        {{ rule}}
+    {% endfor %}
+{% else %}
+    # No forward rules defined
+{% endif %}
+    }
+
+    chain output {
+        type filter hook output priority 0; policy drop;
+{% if output_rules is defined and output_rules %}
+    {% for rule in output_rules %}
+        {{ rule}}
+    {% endfor %}
+{% else %}
+    # No output rules defined
+{% endif %}
+    }
+}

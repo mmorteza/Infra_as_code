@@ -1,0 +1,19 @@
+- name: Configure SSH
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+  notify: Restart SSH
+
+- name: Add SSH users and upload keys
+  user:
+    name: "{{ item.name }}"
+    state: present
+    groups: "{{ item.groups | default('sudo') }}"
+  loop: "{{ ssh_users }}"
+
+- name: Upload authorized keys
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.key }}"
+  loop: "{{ ssh_users }}"

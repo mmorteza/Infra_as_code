@@ -1,0 +1,42 @@
+- name: Install nftables
+  apt:
+    name: nftables
+    state: present
+    update_cache: yes
+
+- name: Create nftables rule dir
+  file:
+    path: /etc/nftables.d
+    state: directory
+    mode: '0755'
+
+#- name: Deploy nftables base rules
+#  copy:
+#    src: templates/base.rules.j2
+#    dest: /etc/nftables.d/base.rules
+#    mode: '0644'
+#
+#- name: Deploy nftables SSH access Rules
+#  copy:
+#    src: templates/ssh.rules.j2
+#    dest: /etc/nftables.d/ssh.rules
+#    mode: '0644'
+#
+#- name: Deploy nftables HTTP rules
+#  copy:
+#    src: templates/http.rules.j2
+#    dest: /etc/nftables.d/http.rules
+#    mode: '0644'
+#  notify: Reload nftables
+
+- name: Configure nftables main file
+  template:
+    src: nft.conf.j2
+    dest: /etc/nftables.conf
+  notify: Restart nftables
+
+- name: Ensure nftables is enabled and started
+  systemd:
+    name: nftables
+    state: started
+    enabled: true

@@ -1,0 +1,65 @@
+# This file is Managed by Ansible. All MAnual changes will be overriden
+
+# Configure Hostname
+visible_hostname {{ visible_hostname }}
+
+# Authentications Settings
+auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/squid_passwd
+auth_param basic realm Daria NL
+acl Authenticated proxy_auth REQUIRED
+
+# Allow Authenticated users
+http_access allow Authenticated
+
+# deny other request
+http_access deny all
+
+# Define standard log format
+logformat hu_redeable %tl.%03tu %>a %Ss/%03>Hs %<st %rm %ru %[un %Sh/%<a %mt
+
+# Access log configuration
+access_log daemon:/var/log/squid/access.log hu_redeable
+
+acl SSL_ports port 443        # https
+acl Safe_ports port 80        # http
+acl Safe_ports port 21        # ftp
+acl Safe_ports port 443       # https
+acl Safe_ports port 70        # gopher
+acl Safe_ports port 210       # wais
+acl Safe_ports port 1025-65535    # unregistered ports
+acl Safe_ports port 280       # http-mgmt
+acl Safe_ports port 488       # gss-http
+acl Safe_ports port 591       # filemaker
+acl Safe_ports port 777       # multiling http
+
+# Allow Local Network
+#http_access allow mynet
+#http_access allow localhost manager
+#http_access deny manager
+#http_access allow Safe_ports
+#http_access allow SSL_ports
+#include /etc/squid/conf.d/*.conf
+#http_access allow localhost
+#http_access deny all
+
+# Default port, change if needed
+http_port {{ proxy_port }}
+
+# Cache MEM = 1/3 Physical RAM
+cache_mem 125 MB
+
+# Cache DIR
+cache_dir ufs /var/spool/squid 2048 16 256
+
+# coredump_dir
+coredump_dir /var/spool/squid
+
+# Default refresh patterns
+refresh_pattern ^ftp:        1440    20%    10080
+refresh_pattern ^gopher:    1440    0%    1440
+refresh_pattern -i (/cgi-bin/|\?) 0    0%    0
+refresh_pattern \/(Packages|Sources)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
+refresh_pattern \/Release(|\.gpg)$ 0 0% 0 refresh-ims
+refresh_pattern \/InRelease$ 0 0% 0 refresh-ims
+refresh_pattern \/(Translation-.*)(|\.bz2|\.gz|\.xz)$ 0 0% 0 refresh-ims
+refresh_pattern .        0    20%    4320
