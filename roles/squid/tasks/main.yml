@@ -3,7 +3,7 @@
     name: squid
     state: present
     update_cache: yes
-  when: "squid not in ansible_facts.packages"
+  #when: "'squid' not in ansible_facts.packages"
 
 - name: Install apache2-utils for hhtpasswd utility
   apt:

@@ -2,6 +2,7 @@
 - name: Install and Configure squid and its dependecies
   hosts: all
   become: true
+  gather_facts: yes
   vars:
     ansible_become_password: "cisco123"
   roles:
