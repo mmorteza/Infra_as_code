@@ -1,28 +1,17 @@
 ---
 input_rules:
-  # Allow established and related connections
-  - ct state established,related counter accept
-
-  # Allow traffic to the loopback interface
-  - iif "lo" accept
-
-  # Block unstablished traffics
-  - ct state invalid drop
-
-  # Allow proxy access on TCP port 443
-  - tcp dport 443 counter log accept
-
-  # Allow SSH from anywhere untill getting whit list IP address
-  - tcp dport 22 counter log accept
-  
-  # Allow connection from Trusted IP addresses
-  #- ip saddr "ip" counter log accept
-
-  # Allow ICMPv6 incomming traffic
-  - icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, echo-request, echo-reply } accept
-
-  # Log and drop all other traffic
-  - log level info drop
+  - rule: ct state established,related counter accept
+    comment: Allow established and related connections
+  - rule: iif "lo" accept
+    comment: "Allow traffic to the loopback interface"
+  - rule: ip saddr 192.168.122.0/24 tcp dport 22 counter log accept
+    comment: Test
+  - rule: 'icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, echo-request, echo-reply } accept'
+    comment: Allow ICMPv6 incomming traffic
+  - rule: tcp dport 443 counter log accept
+    comment: Allow proxy access on TCP port 443
+  - rule: log level info drop
+    comment: Log and drop all other traffic
 
 forward_rules:
 # Add forward rules here

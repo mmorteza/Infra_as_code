@@ -10,8 +10,8 @@ table inet filter {
     chain input {
         type filter hook input priority 0; policy drop;
     {% if input_rules is defined and input_rules %}
-    {% for rule in input_rules %}
-        {{ rule }}
+    {% for item in input_rules %}
+        {{ item.rule }}  # {{ item.comment }}
     {% endfor %}
         {% else %}
             # No input rules defined
