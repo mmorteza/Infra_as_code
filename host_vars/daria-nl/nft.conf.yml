@@ -17,6 +17,7 @@ input_rules:
   # Allow SSH from anywhere untill getting whit list IP address
   - ip saddr 51.79.60.201/32 tcp dport 22 counter log accept  # Morteza Sadeghi
   - ip saddr 185.78.23.43/32 tcp dport 22 counter log accept  # Morteza Sadeghi
+  - ip saddr 194.164.175.18/32 tcp dport 22 counter log accept # Morteza Sadeghi Spain
 
   # Allow connection from Trusted IP addresses
   #- ip saddr "ip" counter log accept
