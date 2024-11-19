@@ -25,6 +25,9 @@ input_rules:
   - rule: ip saddr 185.78.23.43/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi
 
+  - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi Spain
+
   - rule: ip saddr 195.191.45.55/32 counter log accept
     comment: Mr Mortazavi
 
