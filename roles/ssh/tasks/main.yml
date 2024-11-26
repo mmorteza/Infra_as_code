@@ -4,7 +4,7 @@
     dest: /etc/ssh/sshd_config
   notify: Restart SSH
 
-- name: Add SSH users and upload keys
+- name: Add SSH users
   user:
     name: "{{ item.name }}"
     state: present
@@ -14,7 +14,7 @@
 
 - name: Upload authorized keys
   authorized_key:
-    user: "{{ item.name }}"
+    user: "{{ item.0.name }}"
     state: present
-    key: "{{ item.key }}"
-  loop: "{{ ssh_users }}"
+    key: "{{ item.1 }}"
+  loop: "{{ ssh_users | subelements('key') }}"

@@ -1,9 +1,13 @@
+- name: gather  packages facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Install nftables
   apt:
     name: nftables
     state: present
     update_cache: yes
-  #when: "'nftables' not in ansible_facts.packages"
+  when: "'nftables' not in ansible_facts.packages"
 
 - name: Create nftables rule dir
   file:
