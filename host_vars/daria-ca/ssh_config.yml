@@ -9,4 +9,6 @@ root_login: "yes"
 
 ssh_users:
   - name: mosadeghi
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK7ieuhmDyRM3CmqHhIag38aZooiJ5yxb2MKj0KqzdzW" 
+    key: 
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK7ieuhmDyRM3CmqHhIag38aZooiJ5yxb2MKj0KqzdzW" 
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJhU6kBz7cv30KThyWgqJR09cBom+wKJQ8Fp2IxSzi+x"
