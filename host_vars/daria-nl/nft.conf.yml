@@ -1,0 +1,68 @@
+---
+input_rules:
+
+  - rule: ct state established,related counter accept
+    comment: Allow established and related connections
+
+  - rule: iif "lo" accept
+    comment: "Allow traffic to the loopback interface"
+
+  - rule: icmp type echo-request accept
+    comment: Permit ICMPv4
+
+  - rule: ct state invalid drop
+    comment: Block unstablished traffics
+
+  - rule: tcp dport 8899 counter log accept
+    comment: All access
+
+  - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi
+
+  - rule: ip saddr 185.78.23.43/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi
+
+  - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi Spain
+
+  - rule: ip saddr 195.191.45.55/32 counter log accept
+    comment: Mr Mortazavi
+
+  - rule: ip saddr 2.186.231.135/32 counter log accept
+    comment: Daria TIC
+
+  - rule: ip saddr 195.191.45.240/32 counter log accept
+    comment: Daria mtn
+
+  - rule: icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, echo-request, echo-reply } accept
+    comment: Allow ICMPv6 incomming traffic
+
+  - rule: log level info drop
+    comment: Log and drop all other traffic
+
+forward_rules:
+# Add forward rules here
+
+output_rules:
+  # Allow established and related connections
+  - ct state established,related counter accept
+
+  # Allow traffic to the localhost IP address
+  - oif "lo" accept
+
+  # DHCP client requests
+  - udp dport 67 counter log accept
+  - udp dport 68 counter log accept
+
+    # DNS requests
+  - udp dport 53 counter log accept
+
+  # Allow web connection traffic
+  - tcp dport 443 counter log accept
+  - tcp dport 80 counter log accept
+
+  # Allow icmp ping check
+  - icmp type echo-request accept
+
+  # Log and drop all other traffic
+  - log level info drop
