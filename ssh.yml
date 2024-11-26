@@ -1,10 +1,14 @@
 ---
-- name: Install and Configure squid and its dependecies
+- name: gather facts and save it
   hosts: all
-  become: true
-  vars:
-    ansible_become_password: "cisco123"
-  roles:
-    - ssh
-#    - nft
-#    - squid
+  gather_facts: no
+
+  tasks:
+  - name: get packages
+    ansible.builtin.package_facts:
+      manager: auto
+  
+  - name: check whther a package are installed
+    debug:
+      msg: "{{ ansible_facts.packages['nftables']}} version of nftables are installed!"
+    when: "'nftables' in ansible_facts.packages"

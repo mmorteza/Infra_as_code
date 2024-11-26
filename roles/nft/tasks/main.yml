@@ -1,3 +1,7 @@
+- name: gather  packages facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Install nftables
   apt:
     name: nftables

@@ -19,6 +19,12 @@ input_rules:
   - rule: ip saddr 51.79.60.201/32 tcp dport 443 counter log accept
     comment: Morteza Sadeghi
 
+  - rule: ip saddr 85.185.159.34/32 tcp dport 443 counter log accept
+    comment: Yazd Gas
+
+  - rule: ip saddr 185.251.76.254/32 tcp dport 443 counter log accept
+    comment: ILAM Olom Pezeshki
+
   - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi
 

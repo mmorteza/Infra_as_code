@@ -1,3 +1,7 @@
+- name: gather packages facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Install Squid and dependencies
   apt:
     name: squid
@@ -12,7 +16,7 @@
 
 - name: Ensure htpasswd file for squid exists
   copy:
-    src: host_vars '{{ inventory_hostname }}' /files/squid_passwd
+    src: host_vars/{{ inventory_hostname }}/files/squid_passwd
     dest: /etc/squid/squid_passwd
     owner: proxy
     mode: '0600'
