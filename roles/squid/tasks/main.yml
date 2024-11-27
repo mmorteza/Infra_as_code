@@ -13,6 +13,7 @@
   apt:
     name: apache2-utils
     state: present
+  when: "'apache2-utils' not in ansible_facts.packages"
 
 - name: Ensure htpasswd file for squid exists
   copy:
