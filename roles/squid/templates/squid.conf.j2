@@ -5,7 +5,8 @@ visible_hostname {{ visible_hostname }}
 
 # Authentications Settings
 auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/squid_passwd
-auth_param basic realm Daria NL
+auth_param basic realm {{ visible_hostname }}
+auth_param basic casesensitive on
 acl Authenticated proxy_auth REQUIRED
 
 # Allow Authenticated users

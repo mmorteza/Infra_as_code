@@ -4,23 +4,25 @@
 
 - name: Install Squid and dependencies
   apt:
-    name: squid
+    name: "{{ item }}"
     state: present
     update_cache: yes
-  when: "'squid' not in ansible_facts.packages"
+  loop:
+    - squid
+    - apache2-utils
+    - python3-passlib
+  when:
+    - "'{{ item }}' not in ansible_facts.packages"
 
-- name: Install apache2-utils for hhtpasswd utility
-  apt:
-    name: apache2-utils
+- name: Update htpasswd file for New User
+  community.general.htpasswd:
+    path: /etc/squid/squid_passwd
+    name: "{{ item.key }}"
+    password: "{{ item.value }}"
+    create: yes
+    mode: '0640'
     state: present
-  when: "'apache2-utils' not in ansible_facts.packages"
-
-- name: Ensure htpasswd file for squid exists
-  copy:
-    src: host_vars/{{ inventory_hostname }}/files/squid_passwd
-    dest: /etc/squid/squid_passwd
-    owner: proxy
-    mode: '0600'
+  loop: "{{ users | dict2items }}"
 
 - name: Configure Squid
   template:
