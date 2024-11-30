@@ -5,6 +5,7 @@
   gather_facts: no
   vars:
     ansible_become_password: "cisco123"
+  
   roles:
     - ssh
     - nft
