@@ -13,8 +13,23 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
-  - rule: tcp dport 8899 counter log accept
-    comment: All access
+  - rule: ip saddr 85.185.76.130/32 tcp dport 8899 counter log accept
+    comment: Hirkan
+
+  - rule: ip saddr 79.175.135.28/32 tcp dport 8899 counter log accept
+    comment: Jahad Keshavarzi Tehran
+
+  - rule: ip saddr 79.127.36.217/32 tcp dport 8899 counter log accept
+    comment: DariaCo
+
+  - rule: ip saddr 217.219.180.112/32 tcp dport 8899 counter log accept
+    comment: Sana Mazandaran
+
+  - rule: ip saddr 185.117.139.149/32 tcp dport 8899 counter log accept
+    comment: DariaCo
+
+  - rule: ip saddr 87.107.19.194/32 tcp dport 8899 counter log accept
+    comment: DariaCo
 
   - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi
@@ -37,6 +52,9 @@ input_rules:
   - rule: icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, echo-request, echo-reply } accept
     comment: Allow ICMPv6 incomming traffic
 
+  - rule: tcp dport 8899 counter log accept
+    comment: All access
+  
   - rule: log level info drop
     comment: Log and drop all other traffic
 
