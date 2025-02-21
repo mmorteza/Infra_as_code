@@ -2,27 +2,29 @@
   ansible.builtin.package_facts:
     manager: auto
 
-- name: Install Squid and dependencies
+- name: Install Squid
   apt:
-    name: "{{ item }}"
+    name: squid
     state: present
     update_cache: yes
-  loop:
-    - squid
-    - apache2-utils
-    - python3-passlib
   when:
-    - "'{{ item }}' not in ansible_facts.packages"
+    - "'squid' not in ansible_facts.packages"
 
-- name: Update htpasswd file for New User
+- name: load vault vars
+  include_vars:
+    file: proxy_users.yml
+
+- name: Update squid users
   community.general.htpasswd:
     path: /etc/squid/squid_passwd
-    name: "{{ item.key }}"
-    password: "{{ item.value }}"
-    create: yes
+    name: "{{ item.name }}"
+    password: "{{ item.pass }}"
+    hash_scheme: bcrypt
     mode: '0640'
+    owner: proxy
     state: present
-  loop: "{{ users | dict2items }}"
+  loop: "{{ users }}"
+  no_log: true
 
 - name: Configure Squid
   template:

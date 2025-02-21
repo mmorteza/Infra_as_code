@@ -1,0 +1,52 @@
+ntp_primary_server: 0.uk.pool.ntp.org
+ntp_secondary_server: 1.uk.pool.ntp.org
+ntp_fallback_server: 2.uk.pool.ntp.org
+squid_passwd: '/etc/squid/squid_passwd'
+
+# groups 
+common_groups:
+  - name: admin
+    gid: 10000
+  - name: squid
+    gid: 2000
+
+# the below group/groups will added into sudoers file that can run priviledge command w/o password
+sudoer_groups:
+  - admin
+
+# Users 
+service_users:
+  - name: squid
+    groups:
+      - squid
+    uid: 2000
+    shell: /sbin/nologin
+
+common_users:
+  - name: lotusco
+    groups:
+      - admin
+      - sudo
+    uid: 10000
+    shell: /bin/bash
+    comment: "Lotusco Admin"
+    passwd: '$6$5jxDAxdDYp6VL5N5$ByWUHOwpECmDXNhmzozPNQHybdh/cOCQd46KSXYftxdVBfkrZWSYVUhg7MyaqqfTokmA0Vc.fEwd6owVAeM2N.'
+  - name: mosadeghi
+    groups:
+      - admin
+      - sudo
+    uid: 1000
+    shell: /bin/bash
+    comment: "Morteza Sadeghi"
+    passwd: '$6$s6oEFs3oEmBWiyDC$JG8C8j/SRK37dh/cJyXa49wTzCLAkiLMQqqFV9JmitLiu0hOqLK6oeqU5WdyYqhdRfQtsuVQ0NrOwhNoPJijE.'
+
+common_packages:
+    - apache2-utils
+    - python3-passlib
+    - htop
+    - ethtool
+
+# the below group/groups will added into sudoers file that can run priviledge command w/o password
+sudoer_groups:
+  - admin
+

@@ -1,2 +1,3 @@
 users:
-  morteza: 'cisco123'
+  - name: morteza
+    pass: 'cisco123'

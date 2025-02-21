@@ -1,3 +1,5 @@
 users:
-  morteza: "cisco123"
-  Tiam: "Negahan7895()Sardar"
+  - name: morteza
+    pass: "cisco123"
+  - name: Tiam
+    pass: "Negahan7895()Sardar"

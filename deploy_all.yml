@@ -1,12 +1,14 @@
 ---
-- name: Install and Configure squid and its dependecies
+- name: Install and Configure squid and it's dependecies
   hosts: all
   become: true
-  gather_facts: no
-  vars:
-    ansible_become_password: "cisco123"
+  gather_facts: yes
   
   roles:
-    - ssh
-    - nft
-    - squid
+    - role: common
+      tags: ['common']
+    - role: nft
+      tags: ['nft']
+    - role: squid
+      tags: ['proxy', 'squid']
+

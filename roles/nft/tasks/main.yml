@@ -9,11 +9,17 @@
     update_cache: yes
   when: "'nftables' not in ansible_facts.packages"
 
+- name: register status of /etc/nftables.d/
+  stat:
+    path: /etc/nftables.d/
+  register: nft_dir
+
 - name: Create nftables rule dir
   file:
     path: /etc/nftables.d
     state: directory
     mode: '0755'
+  when: " not nft_dir.stat.exists"
 
 #- name: Deploy nftables base rules
 #  copy:
@@ -34,7 +40,7 @@
 #    mode: '0644'
 #  notify: Reload nftables
 
-- name: Configure nftables main file
+- name: Upload nftables configuration
   template:
     src: nft.conf.j2
     dest: /etc/nftables.conf

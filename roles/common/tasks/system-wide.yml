@@ -1,0 +1,15 @@
+---
+- name: upload system banner in /etc/issue
+  template:
+    src: banner.j2
+    dest: /etc/issue
+    mode: '0744'
+    owner: root
+    group: root
+
+- name: Disable update-motd
+  shell: sudo chmod -x /etc/update-motd.d/*
+
+- name: set system hostname
+  hostname:
+    name: "access-lotusco.co"

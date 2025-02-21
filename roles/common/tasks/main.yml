@@ -1,0 +1,8 @@
+- name: Include tasks for common configuration
+  include_tasks: "{{ item }}"
+  loop:
+    - packages.yml
+    - system-wide.yml
+    - ntp.yml
+    - ssh.yml
+    - users.yml

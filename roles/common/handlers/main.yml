@@ -1,0 +1,12 @@
+---
+# handlers file for common
+- name: Restart ntp
+  service:
+    name: systemd-timesyncd
+
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted
+
+

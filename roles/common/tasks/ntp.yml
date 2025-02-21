@@ -1,0 +1,14 @@
+---
+#- name: Deploy NTP authentication key if applicable
+#  copy:
+#    src: files/ntp.keys
+#    dest: /etc/ntp.keys
+#    owner: ntp
+#    group: ntp
+#    mode: '0600'
+
+- name: Deploy NTP configuration for both client and server
+  template:
+    src: ntp.conf.j2
+    dest: /etc/systemd/timesyncd.conf
+  notify: Restart ntp

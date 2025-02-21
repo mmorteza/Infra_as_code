@@ -1,0 +1,55 @@
+- name: determined groups
+  getent:
+    database: group
+
+- name: determined groups
+  getent:
+    database: passwd
+
+- name: Create the groups
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  when: 
+    - "'{{ item.name }}' not in ansible_facts.getent_group"
+  loop: "{{ common_groups }}"
+
+- name: Create service user account
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups }}"
+    uid: "{{ item.uid }}"
+    shell: "{{ item.shell }}"
+  ignore_errors: yes
+  loop: "{{ service_users }}"
+
+- name: Create common user accounts
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups | join(',') }}"
+    uid: "{{ item.uid }}"
+    shell: "{{ item.shell }}"
+    password: "{{ item.passwd }}"
+    update_password: always
+    append: true
+#  when: "'{{ item.name }}' not in ansible_facts.getent_passwd"
+  ignore_errors: yes
+  loop: "{{ common_users }}"
+
+- name: add users to sudoers file # The specific groups running sudo without password
+  community.general.sudoers:
+    name: admins-no-password
+    group: admin
+    nopassword: true
+    state: present
+    validation: required
+    commands: ALL
+
+- name: Upload SSH key if not present
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.key | join(' ') }}"
+    manage_dir: true
+    exclusive: true
+  loop: "{{ ssh_users }}"
