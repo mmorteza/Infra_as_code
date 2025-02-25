@@ -45,14 +45,6 @@
     validation: required
     commands: ALL
 
-# - name: Upload SSH key if not present
-#   authorized_key:
-#     user: "{{ item.name }}"
-#     state: present
-#     key: "{{ item.key | join(' ') }}"
-#     manage_dir: true
-#     exclusive: true
-#   loop: "{{ ssh_users }}"
 - name: Upload SSH keys if not present
   ansible.builtin.authorized_key:
     user: "{{ item.0.name }}"

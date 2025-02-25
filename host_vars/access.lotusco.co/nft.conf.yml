@@ -13,7 +13,10 @@ input_rules:
   - rule: ip saddr 51.79.60.201/32 tcp dport 443 counter log accept
     comment: Morteza Sadeghi
 
-  - rule: ip saddr 185.78.23.43/32 tcp dport 443 counter log accept
+  - rule: ip saddr 185.78.23.121/32 tcp dport 443 counter log accept
+    comment: Splunk ES
+    
+    - rule: ip saddr 185.78.23.43/32 tcp dport 443 counter log accept
     comment: Morteza Sadeghi
   
   - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
