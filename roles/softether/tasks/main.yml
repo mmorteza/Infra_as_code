@@ -1,0 +1,55 @@
+---
+- name: include tasks
+  include_tasks: dependencies.yml
+
+- name: make prefix directory
+  file:
+    path: "{{ se_prefix }}"
+    state: directory
+
+- name: download softether source
+  get_url:
+    url: 'http://softether-download.com/files/softether/{{ se_version }}-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz'
+    dest: '{{ tmpdir }}/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz'
+  register: download
+
+- name: unarchive
+  unarchive:
+    remote_src: true
+    src: "{{ tmpdir }}/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz"
+    dest: "{{ se_dir }}"
+  #when: download.changed
+  register: unarchive
+
+- name: make
+  shell: yes 1 | make
+  args:
+    chdir: "{{ se_dir }}/vpnserver"
+  #when: unarchive.changed
+  register: make
+
+- name: configure lang.config
+  lineinfile:
+    dest: "{{ se_dir }}/vpnserver/lang.config"
+    regexp: "^(en|ja|cn)$"
+    line: "{{ se_lang }}"
+  when: make.changed
+
+- name: install init script
+  template: >
+    src=vpnserver.j2
+    dest=/etc/init.d/vpnserver.sh
+    mode=0755
+
+- name: Configure Systemd service
+  template:
+    src: softether-vpnserver.j2
+    dest: /etc/systemd/system/softether-vpnserver.service
+    mode: '0755'
+
+- name: start softether vpn service
+  service:
+    name: softether-vpnserver
+    enabled: yes
+    daemon_reload: true
+    state: started

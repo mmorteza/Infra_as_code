@@ -1,0 +1,20 @@
+---
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: install packages on RHEL Dist
+  yum: name={{ item }} state=present
+  loop: "{{ se_require_packages }}"
+  when: 
+    - (ansible_distribution == "RedHat" or ansible_distribution == 'CentOS' or ansible_distribution == 'CloudLinux')
+    - "' {{ item }} no in ansible_facts.packages "
+
+- name: Install common packages if they are not installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ se_require_packages }}"
+  when:
+    - "'{{ item }}' not in ansible_facts.packages"
+    - (ansible_distribution == "Ubuntu" or ansible_distribution == "Ubuntu")
