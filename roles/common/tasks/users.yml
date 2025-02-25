@@ -20,7 +20,7 @@
     groups: "{{ item.groups }}"
     uid: "{{ item.uid }}"
     shell: "{{ item.shell }}"
-  ignore_errors: yes
+  ignore_errors: true
   loop: "{{ service_users }}"
 
 - name: Create common user accounts
@@ -33,7 +33,7 @@
     update_password: always
     append: true
 #  when: "'{{ item.name }}' not in ansible_facts.getent_passwd"
-  ignore_errors: yes
+  ignore_errors: true
   loop: "{{ common_users }}"
 
 - name: add users to sudoers file # The specific groups running sudo without password
@@ -45,11 +45,18 @@
     validation: required
     commands: ALL
 
-- name: Upload SSH key if not present
-  authorized_key:
-    user: "{{ item.name }}"
+# - name: Upload SSH key if not present
+#   authorized_key:
+#     user: "{{ item.name }}"
+#     state: present
+#     key: "{{ item.key | join(' ') }}"
+#     manage_dir: true
+#     exclusive: true
+#   loop: "{{ ssh_users }}"
+- name: Upload SSH keys if not present
+  ansible.builtin.authorized_key:
+    user: "{{ item.0.name }}"
     state: present
-    key: "{{ item.key | join(' ') }}"
+    key: "{{ item.1 }}"
     manage_dir: true
-    exclusive: true
-  loop: "{{ ssh_users }}"
+  loop: "{{ ssh_users | subelements('key') }}"

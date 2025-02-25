@@ -5,7 +5,7 @@
 - name: Update cache
   apt:
     update_cache: true
-  ignore_errors: yes
+  ignore_errors: True
 
 - name: Install common packages if they are not installed
   apt:

@@ -1,5 +1,5 @@
 ---
-- name: Install and Configure squid and it's dependecies
+- name: Install and Configure infra 
   hosts: all
   become: true
   gather_facts: yes
@@ -11,4 +11,6 @@
       tags: ['nft']
     - role: squid
       tags: ['proxy', 'squid']
+    - role: softether
+      tags: ['se', 'vpn_server']
 

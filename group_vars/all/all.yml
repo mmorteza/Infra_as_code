@@ -2,6 +2,27 @@ ntp_primary_server: 0.uk.pool.ntp.org
 ntp_secondary_server: 1.uk.pool.ntp.org
 ntp_fallback_server: 2.uk.pool.ntp.org
 squid_passwd: '/etc/squid/squid_passwd'
+se_service_dir: '/etc/init.d'
+
+# Softether Vars
+tmpdir: '/tmp'
+se_prefix: '/opt/softether'
+se_version: 'v4.42-9798-rtm-2023.06.30'
+se_lang: en
+se_dir: '/opt'
+
+# softether required packages
+se_require_packages:
+  - binutils
+  - gcc
+  - build-essential
+  - gnupg2
+  - make
+  - libreadline-dev
+  - libssl-dev
+  - libncurses5-dev
+  - libncursesw5-dev
+  - libpthread-stubs0-dev
 
 # groups 
 common_groups:
@@ -45,8 +66,4 @@ common_packages:
     - python3-passlib
     - htop
     - ethtool
-
-# the below group/groups will added into sudoers file that can run priviledge command w/o password
-sudoer_groups:
-  - admin
 
