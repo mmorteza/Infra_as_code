@@ -10,12 +10,21 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
-  - rule: ip saddr 51.79.60.201/32 tcp dport 443 counter log accept
+  - rule: ip saddr 51.79.60.201/32 tcp dport 5555 counter log accept
     comment: Morteza Sadeghi
+
+  - rule: ip saddr 192.111.144.71/32 tcp dport 22 counter accept
+    comment: Farshid VPN
+
+  - rule: ip saddr 192.111.144.71/32 tcp dport 5555 counter accept
+    comment: Farshid VPN
 
   - rule: ip saddr 185.78.23.43/32 tcp dport 443 counter log accept
     comment: Morteza Sadeghi
   
+  - rule: ip saddr 185.78.23.43/32 tcp dport 5555 counter log accept
+    comment: Morteza Sadeghi
+
   - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi
 
@@ -46,11 +55,11 @@ output_rules:
   - udp dport 53 counter log accept
 
   # Allow web connection traffic
-  - tcp dport 443 counter log accept
-  - tcp dport 80 counter log accept
+  # - tcp dport 443 counter log accept
+  # - tcp dport 80 counter log accept
 
   # Allow icmp ping check
   - icmp type echo-request accept
 
   # Log and drop all other traffic
-  - log level info drop
+  #- log level info drop
