@@ -10,6 +10,9 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
+  - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } ounter accept
+    comment: Lotusco Office
+
   - rule: ip saddr 51.79.60.201/32 tcp dport 5555 counter log accept
     comment: Morteza Sadeghi
 

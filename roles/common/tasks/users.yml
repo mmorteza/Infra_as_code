@@ -22,6 +22,7 @@
     shell: "{{ item.shell }}"
   ignore_errors: true
   loop: "{{ service_users }}"
+  when: "'proxy_server' in group_names"
 
 - name: Create common user accounts
   user:

@@ -12,4 +12,4 @@
 
 - name: set system hostname
   hostname:
-    name: "access-lotusco.co"
+    name: "{{ inventory_hostname }}"
