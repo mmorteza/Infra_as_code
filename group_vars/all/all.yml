@@ -67,4 +67,6 @@ common_packages:
     - python3-passlib
     - htop
     - ethtool
+    - curl
+    - fail2ban
 
