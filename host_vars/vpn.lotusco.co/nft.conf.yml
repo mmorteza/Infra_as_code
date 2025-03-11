@@ -49,4 +49,4 @@ output_rules:
 
   # Allow traffic to the localhost IP address
   - oif "lo" accept
-  - oif "eth0" accept
+  - oif "ens6" accept

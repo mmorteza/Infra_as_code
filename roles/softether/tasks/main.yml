@@ -23,14 +23,14 @@
     remote_src: true
     src: "{{ tmpdir }}/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz"
     dest: "{{ se_dir }}"
-  when: download.changed
+  #when: download.changed
   register: unarchive
 
 - name: make
   shell: yes 1 | make
   args:
     chdir: "{{ se_dir }}/vpnserver"
-  when: unarchive.changed
+  #when: unarchive.changed
   register: make
 
 - name: configure lang.config
@@ -38,7 +38,7 @@
     dest: "{{ se_dir }}/vpnserver/lang.config"
     regexp: "^(en|ja|cn)$"
     line: "{{ se_lang }}"
-  when: make.changed
+  #when: make.changed
 
 - name: install init script
   template: >

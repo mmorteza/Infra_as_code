@@ -17,4 +17,4 @@
   loop: "{{ se_require_packages }}"
   when:
     - "'{{ item }}' not in ansible_facts.packages"
-    - (ansible_distribution == "Ubuntu" or ansible_distribution == "Ubuntu")
+    - (ansible_distribution == "Ubuntu" or ansible_os_family == "Debian")

@@ -23,6 +23,7 @@ se_require_packages:
   - libncurses5-dev
   - libncursesw5-dev
   - libpthread-stubs0-dev
+  - make
 
 # groups 
 common_groups:
