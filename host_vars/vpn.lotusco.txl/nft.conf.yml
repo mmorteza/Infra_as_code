@@ -10,7 +10,10 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
-  - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } ounter accept
+  - rule: ip saddr 185.105.239.186/32 tcp dport 443 counter accept
+    comment: Lotusco Iran VPN Server
+  
+  - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } counter accept
     comment: Lotusco Office
 
   - rule: ip saddr 51.79.60.201/32 tcp dport 5555 counter log accept
@@ -49,4 +52,4 @@ output_rules:
 
   # Allow traffic to the localhost IP address
   - oif "lo" accept
-  - oif "eth0" accept
+  - oif "ens6" accept
