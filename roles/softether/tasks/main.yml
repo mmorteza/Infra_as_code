@@ -2,6 +2,10 @@
 - name: include tasks
   include_tasks: dependencies.yml
 
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: make prefix directory
   file:
     path: "{{ se_prefix }}"
@@ -11,6 +15,7 @@
   get_url:
     url: 'http://softether-download.com/files/softether/{{ se_version }}-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz'
     dest: '{{ tmpdir }}/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz'
+  when: "'softether-vpnserver' not in ansible_facts.packages"
   register: download
 
 - name: unarchive
@@ -18,14 +23,14 @@
     remote_src: true
     src: "{{ tmpdir }}/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz"
     dest: "{{ se_dir }}"
-  #when: download.changed
+  when: download.changed
   register: unarchive
 
 - name: make
   shell: yes 1 | make
   args:
     chdir: "{{ se_dir }}/vpnserver"
-  #when: unarchive.changed
+  when: unarchive.changed
   register: make
 
 - name: configure lang.config
@@ -53,3 +58,10 @@
     enabled: yes
     daemon_reload: true
     state: started
+
+- name: Enable IP forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    state: present
+    reload: yes

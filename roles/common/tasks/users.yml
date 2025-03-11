@@ -22,7 +22,11 @@
     shell: "{{ item.shell }}"
   ignore_errors: true
   loop: "{{ service_users }}"
+<<<<<<< HEAD
   when: "'proxy_server' in group_names"
+=======
+  when: "'squid' in group_names"
+>>>>>>> 652bfbd (adjust plays)
 
 - name: Create common user accounts
   user:
