@@ -12,16 +12,7 @@ input_rules:
 
   - rule: tcp dport 1701 counter accept
     comment: allow L2TP
-  
-  - rule: udp dport { isakmp, ipsec-nat-t } counter accept
-    comment: "accept ISAKMP and IPsec NAT traversal"
 
-  - rule: udp dport { 1723, 3271 } counter accept
-    commnet: allow vpn access
-
-  - rule: ip protocol { ah, esp } counter accept
-    commnet: "accept AH and ESP"
-  
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } counter accept
     comment: Lotusco Office
 
