@@ -10,6 +10,12 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
+  - rule: tcp dport 1701 counter accept
+    comment: allow L2TP
+  
+  - rule: udp dport { 500,4500 } counter accept
+    comment: Allow ike and ike NAT-T
+
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } counter accept
     comment: Lotusco Office
 
@@ -50,3 +56,9 @@ output_rules:
   # Allow traffic to the localhost IP address
   - oif "lo" accept
   - oif "eth0" accept
+  # DHCP client requests
+  - udp dport 67 counter log accept
+  - udp dport 68 counter log accept
+
+  # DNS requests
+  - udp dport 53 counter log accept
