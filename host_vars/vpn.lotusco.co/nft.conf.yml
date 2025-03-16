@@ -22,6 +22,9 @@ input_rules:
   - rule: ip protocol esp counter accept
     comment: accept ESP
 
+  - rule: ip saddr 212.227.61.231/32 tcp dport 443 counter log accept
+    comment: DE server
+
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } counter accept
     comment: Lotusco Office
 
@@ -49,7 +52,7 @@ input_rules:
   - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi Spain
 
-  - rule: counter
+  - rule: counter drop
     comment: "count dropped packets"
 
 forward_rules:

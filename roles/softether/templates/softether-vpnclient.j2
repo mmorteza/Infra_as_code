@@ -1,0 +1,12 @@
+[Unit]
+Description = vpnclient daemon
+
+[Service]
+ExecStart = {{ se_service_dir }}/vpnclient.sh start
+ExecStop = {{ se_service_dir }}/vpnclient.sh stop
+ExecReload = {{ se_service_dir }}/vpnclient.sh restart
+Restart = always
+Type = forking
+
+[Install]
+WantedBy = multi-user.target

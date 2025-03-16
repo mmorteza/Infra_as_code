@@ -1,0 +1,8 @@
+- name: Copy Netplan route configuration
+  template:
+    src: route.eth0.j2
+    dest: /etc/netplan/99-routes.yaml
+    mode: '0644'
+
+- name: Apply Netplan configuration
+  command: netplan apply

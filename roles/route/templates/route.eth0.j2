@@ -1,0 +1,12 @@
+network:
+  version: 2
+  ethernets:
+    {{ interface }}:
+      routes:
+{% for route in routes %}
+        - to: {{ route.to }}
+          via: {{ route.via }}
+{% if route.metric is defined %}
+          metric: {{ route.metric }}
+{% endif %}
+{% endfor %}

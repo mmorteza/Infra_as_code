@@ -13,4 +13,6 @@
       tags: ['proxy', 'squid']
     - role: softether
       tags: ['se', 'vpn_server']
+    - role: route
+      tags: ['route']
 
