@@ -9,6 +9,9 @@ input_rules:
 
   - rule: ct state invalid drop
     comment: Block unstablished traffics
+  
+  - rule: ip saddr 46.245.99.146/32 tcp dport { 443 } counter accept
+    comment: Bourse Energy
 
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443 } counter accept
     comment: Lotusco Office
