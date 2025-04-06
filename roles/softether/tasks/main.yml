@@ -24,15 +24,14 @@
     dest: '{{ tmpdir }}/softether-vpnserver-{{ se_version }}-linux-x64-64bit.tar.gz'
   when: 
     - "'softether-client' not in ansible_facts.packages"
-    - "'vpn.lotusco.co' in inventory_hostname"
+    - "'vpn.lotusco.co' in host_names"
   register: download
 
 - name: upload softether vpn client file
   copy:
-    src: files/softether-vpnclient-{{ se_version }}-linux-x64-64bit.tar.gz
+    src: files/softether-vpnclient-{{ se_version }}--linux-x64-64bit.tar.gz
     dest: /tmp/
-    force: no
-
+  
 - name: unarchive vpn server
   unarchive:
     remote_src: true
@@ -49,67 +48,35 @@
   #when: download.changed
   register: unarchive
 
-- name: make vpnserver
+- name: make
   shell: yes 1 | make
   args:
     chdir: "{{ se_dir }}/vpnserver"
   #when: unarchive.changed
   register: make
 
-- name: make vpnclient
-  shell: yes 1 | make
-  args:
-    chdir: "{{ se_dir }}/vpnclient"
-  #when: unarchive.changed
-  register: make
-
-- name: configure vpnserver lang.config
+- name: configure lang.config
   lineinfile:
     dest: "{{ se_dir }}/vpnserver/lang.config"
     regexp: "^(en|ja|cn)$"
     line: "{{ se_lang }}"
   #when: make.changed
 
-# - name: configure vpn client lang.config
-#   lineinfile:
-#     dest: "{{ se_dir }}/vpnclient/lang.config"
-#     regexp: "^(en|ja|cn)$"
-#     line: "{{ se_lang }}"
-#   #when: make.changed
-
-- name: install init script for vpn server
+- name: install init script
   template: >
     src=vpnserver.j2
     dest=/etc/init.d/vpnserver.sh
     mode=0755
-- name: install init script for vpn client
-  template: >
-    src=vpnclient.j2
-    dest=/etc/init.d/vpnclient.sh
-    mode=0755
 
-- name: Configure Systemd service for vpn server
+- name: Configure Systemd service
   template:
     src: softether-vpnserver.j2
     dest: /etc/systemd/system/softether-vpnserver.service
     mode: '0755'
 
-- name: Configure Systemd service for vpn Client
-  template:
-    src: softether-vpnclient.j2
-    dest: /etc/systemd/system/softether-vpnclient.service
-    mode: '0755'
-
-- name: start softether-vpnserver vpn service
+- name: start softether vpn service
   service:
     name: softether-vpnserver
-    enabled: yes
-    daemon_reload: true
-    state: started
-
-- name: start softether-vpnclient vpn service
-  service:
-    name: softether-vpnclient
     enabled: yes
     daemon_reload: true
     state: started

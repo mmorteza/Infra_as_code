@@ -10,10 +10,13 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
+  - rule: udp dport 443 counter accept
+    comment: allow openvpn connection to port 443
+
   - rule: ip saddr 185.105.239.186/32 tcp dport 443 counter accept
     comment: Lotusco Iran VPN Server
   
-  - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } counter accept
+  - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555,2073,8443 } counter accept
     comment: Lotusco Office
 
   - rule: ip saddr 51.79.60.201/32 tcp dport 5555 counter log accept

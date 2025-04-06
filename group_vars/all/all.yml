@@ -63,10 +63,15 @@ common_users:
     passwd: '$6$s6oEFs3oEmBWiyDC$JG8C8j/SRK37dh/cJyXa49wTzCLAkiLMQqqFV9JmitLiu0hOqLK6oeqU5WdyYqhdRfQtsuVQ0NrOwhNoPJijE.'
 
 common_packages:
-    - apache2-utils
-    - python3-passlib
-    - htop
-    - ethtool
-    - curl
-    - fail2ban
+  - apache2-utils
+  - python3-passlib
+  - htop
+  - ethtool
+  - curl
+  - fail2ban
 
+v2ray_packages:
+  - wget
+  - curl
+  - tar
+  - tzdata
