@@ -5,8 +5,16 @@ network:
       routes:
 {% for route in routes %}
         - to: {{ route.to }}
+{% if route.via is defined and route.via %}    
           via: {{ route.via }}
+{% endif %}
+{% if route['on-link'] is defined and route['on-link'] %}
+          on-link: true
+{% endif%}
 {% if route.metric is defined %}
           metric: {{ route.metric }}
+{% endif %}
+{% if route.table is defined %}
+          table: {{ route.table }}
 {% endif %}
 {% endfor %}

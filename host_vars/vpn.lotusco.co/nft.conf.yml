@@ -7,6 +7,9 @@ input_rules:
   - rule: iif "lo" accept
     comment: "Allow traffic to the loopback interface"
 
+  - rule: iif "tun0" counter accept
+    comment: "Accept any on tunnel 0 interface"
+
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
@@ -22,7 +25,7 @@ input_rules:
   - rule: ip protocol esp counter accept
     comment: accept ESP
 
-  - rule: ip saddr 212.227.61.231/32 tcp dport 443 counter log accept
+  - rule: ip saddr 212.227.61.231/32 counter log accept
     comment: DE server
 
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555 } counter accept
@@ -56,7 +59,7 @@ input_rules:
     comment: "count dropped packets"
 
 forward_rules:
-# Add forward rules here
+  - ip saddr 192.168.130.0/24 ip daddr 0.0.0.0/0 counter accept
 
 output_rules:
   # Allow established and related connections
@@ -65,6 +68,8 @@ output_rules:
   # Allow traffic to the localhost IP address
   - oif "lo" accept
   - oif "eth0" accept
+  - oif "tun0" accept
+
   # DHCP client requests
   - udp dport 67 counter log accept
   - udp dport 68 counter log accept

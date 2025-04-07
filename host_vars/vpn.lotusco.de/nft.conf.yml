@@ -7,13 +7,16 @@ input_rules:
   - rule: iif "lo" accept
     comment: "Allow traffic to the loopback interface"
 
+  - rule: iif "tunn0" counter accept
+    comment: "Accept any on tunnel 0 interface"
+
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
   - rule: udp dport 443 counter accept
     comment: allow openvpn connection to port 443
 
-  - rule: ip saddr 185.105.239.186/32 tcp dport 443 counter accept
+  - rule: ip saddr 185.105.239.186/32 counter accept
     comment: Lotusco Iran VPN Server
   
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,5555,2073,8443 } counter accept
@@ -47,7 +50,7 @@ input_rules:
     comment: Log and drop all other traffic
 
 forward_rules:
-# Add forward rules here
+  - ip saddr 192.168.130.0/24 ip daddr 0.0.0.0/0 counter accept
 
 output_rules:
   # Allow established and related connections
@@ -56,3 +59,8 @@ output_rules:
   # Allow traffic to the localhost IP address
   - oif "lo" accept
   - oif "ens6" accept
+  - oif "tunn0" accept
+
+nat_rules:
+  # nat vpn clients to ens6
+  - ip saddr 192.168.130.0/24 oif "ens6" masquerade

@@ -40,3 +40,18 @@ table inet filter {
 {% endif %}
     }
 }
+
+{% if enable_nat | default(false) %}
+table ip nat {
+    chain POSTROUTING {
+        type nat hook postrouting priority 100;
+{% if nat_rules is defined and nat_rules %}
+    {% for rule in nat_rules %}
+        {{ rule }}
+    {% endfor %}
+{% else %}
+    # No NAT interfaces defined
+{% endif %}
+    }
+}
+{% endif %}

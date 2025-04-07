@@ -1,8 +1,14 @@
 - name: Copy Netplan route configuration
   template:
-    src: route.eth0.j2
+    src: route.j2
     dest: /etc/netplan/99-routes.yaml
-    mode: '0644'
+    mode: '0600'
 
 - name: Apply Netplan configuration
   command: netplan apply
+
+- name: Copy iproute2 table configuration
+  template:
+    src: pbr.j2
+    dest: /etc/iproute2/rt_tables
+    mode: '0644'

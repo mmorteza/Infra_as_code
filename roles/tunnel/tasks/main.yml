@@ -1,0 +1,60 @@
+- name: Validate IPv4
+  assert:
+    that:
+      - ansible_default_ipv4.address is match("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+    fail_msg: "Invalid IPv4 address"
+
+# - name: Validate if local IPv6 is a valid address
+#   debug:
+#     msg: "Local IPv6 is valid."
+#   when: local_ipv6 is match('^([a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}$|([a-fA-F0-9]{1,4}:){1,7}:|([a-fA-F0-9]{1,4}:){1,6}:[a-fA-F0-9]{1,4}$')
+
+# - name: Fail if local IPv6 is invalid
+#   fail:
+#     msg: "Invalid local IPv6 address!"
+#   when: local_ipv6 is not match('^([a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}$|([a-fA-F0-9]{1,4}:){1,7}:|([a-fA-F0-9]{1,4}:){1,6}:[a-fA-F0-9]{1,4}$')
+
+# - name: Ensure systemd-networkd is enabled and started
+#   systemd:
+#     name: systemd-networkd
+#     state: started
+#     enabled: yes
+
+# - name: Create networkd configuration file for tunnel
+#   copy:
+#     dest: "/etc/systemd/network/{{ tunnel_name }}.network"
+#     content: |
+#       [Match]
+#       Name={{ tunnel_name }}
+      
+#       [Network]
+#       Address={{ local_ipv6 }}/64
+#       Gateway={{ gateway_ipv6 }}
+#   notify: Restart systemd-networkd
+
+- name: Create netplan configuration file for tunnel
+  copy:
+    dest: "/etc/netplan/tunnel.yaml"
+    content: |
+      network:
+        version: 2
+        tunnels:
+          {{ tunnel_name }}:
+            mode: sit
+            local: {{ local_ipv4 }}
+            remote: {{ remote_ipv4 }}
+            addresses:
+              - {{ local_ipv6 }}/64
+            mtu: {{ mtu }}
+    mode: '0600'
+  notify: Apply netplan configuration
+
+- name: Display tunnel configuration summary
+  debug:
+    msg: |
+      Tunnel name: {{ tunnel_name }}
+      Local IPv6 address: {{ local_ipv6 }}
+      Remote IPv6 address: {{ gateway_ipv6 }}
+      Remote IPv4 address: {{ remote_ipv4 }}
+      MTU: {{ mtu }}
+      Protocol: SIT

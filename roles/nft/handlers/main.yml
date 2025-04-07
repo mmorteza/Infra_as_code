@@ -2,3 +2,6 @@
   ansible.builtin.service:
     name: nftables
     state: reloaded
+
+- name: Reload nftables
+  command: nft -f /etc/nftables.conf

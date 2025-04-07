@@ -9,6 +9,12 @@
     update_cache: yes
   when: "'nftables' not in ansible_facts.packages"
 
+- name: Ensure nftables is enabled and started
+  systemd:
+    name: nftables
+    state: started
+    enabled: true
+
 - name: register status of /etc/nftables.d/
   stat:
     path: /etc/nftables.d/
@@ -44,10 +50,5 @@
   template:
     src: nft.conf.j2
     dest: /etc/nftables.conf
-  notify: Restart nftables
+  notify: Reload nftables
 
-- name: Ensure nftables is enabled and started
-  systemd:
-    name: nftables
-    state: started
-    enabled: true

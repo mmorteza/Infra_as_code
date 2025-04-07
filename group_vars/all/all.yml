@@ -69,6 +69,8 @@ common_packages:
   - ethtool
   - curl
   - fail2ban
+  - jq
+  - iproute2
 
 v2ray_packages:
   - wget

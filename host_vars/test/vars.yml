@@ -1,0 +1,9 @@
+enable_nat: true
+nat_interfaces:
+  - enp1s0
+tunnel_name: "tun0"
+local_ipv6: '2001:db8:85a3::1'
+gateway_ipv6: '2001:db8:85a3::2'
+remote_ipv4: '185.105.239.186'
+local_ipv4: "{{ ansible_default_ipv4.address }}"
+mtu: 1380

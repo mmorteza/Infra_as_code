@@ -1,0 +1,7 @@
+enable_nat: false
+tunnel_name: tunn0
+local_ipv6: 2001:db8:cafe::2
+gateway_ipv6: 2001:db8:cafe::1
+remote_ipv4: 212.227.61.231
+local_ipv4: "{{ ansible_default_ipv4.address }}"
+mtu: 1400
