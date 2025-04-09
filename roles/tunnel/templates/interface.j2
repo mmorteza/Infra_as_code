@@ -1,0 +1,71 @@
+network:
+  version: 2
+{% for iface_type in ['ethernets', 'tunnels', 'vlans', 'bridges', 'bonds', 'sit', 'isatap'] %}
+{% set iface_data = ('netplan_' ~ iface_type) %}
+{% if vars[iface_data] is defined %}
+  {{ iface_type }}:
+{% for iface in vars[iface_data] %}
+{% if iface['interface_name'] is defined %}
+    {{ iface['interface_name'] }}:
+{% if iface['dhcp4'] is defined %}
+      dhcp4: {{ iface['dhcp4'] | lower }}
+{% endif %}
+{% if iface['dhcp6'] is defined %}
+      dhcp6: {{ iface['dhcp6'] | lower }}
+{% endif %}
+{% if iface['addresses'] is defined %}
+      addresses:
+{% for address in iface['addresses'] %}
+        - "{{ address }}"
+{% endfor %}
+{% endif %}
+{% if iface['mode'] is defined %}
+      mode: {{ iface['mode'] | lower }}
+{% endif %}
+{% if iface['ttl'] is defined %}
+      ttl: {{ iface['ttl'] }}
+{% endif %}
+{% if iface['mtu'] is defined %}
+      mtu: {{ iface['mtu'] }}
+{% endif %}
+{% if iface['routing-policy'] is defined %}
+      routing-policy:
+        - from: {{ iface['routing-policy']['from'] }}
+          to: {{ iface['routing-policy']['dest'] }}
+          table: {{ iface['routing-policy']['table'] }}
+{% endif %}
+{% if iface['gateway4'] is defined %}
+      routes:
+        - to: default
+          via: "{{ iface['gateway4'] }}"
+{% endif %}
+{% if iface['gateway6'] is defined %}
+      routes:
+        - to: default
+          via: "{{ iface['gateway6'] }}"
+          on-link: true
+{% endif %}
+{% if iface['nameservers'] is defined %}
+      nameservers:
+{% if iface['nameservers']['addresses'] is defined %}
+        addresses:
+{% for ns in iface['nameservers']['addresses'] %}
+          - "{{ ns }}"
+{% endfor %}
+{% endif %}
+{% if iface['nameservers']['search'] is defined %}
+        search:
+{% for domain in iface['nameservers']['search'] %}
+          - "{{ domain }}"
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if iface['parameters'] is defined %}
+{% for key, value in iface['parameters'].items() %}
+      {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
