@@ -7,3 +7,21 @@ gateway_ipv6: 2001:db8:cafe::2
 remote_ipv4: 185.105.239.186
 local_ipv4: "{{ ansible_default_ipv4.address }}"
 mtu: 1400
+
+netplan_tunnels:
+  - interface_name: tunn0
+    addresses:
+      - 2001:db8:cafe::1/64
+    parameters:
+      mode: sit
+      local: 212.227.61.231
+      remote: 185.105.239.156
+      mtu: 1400
+  - interface_name: gre6
+    addresses:
+      - 10.1.1.1/30
+    parameters:
+      mode: ip6gre
+      local: 2001:db8:cafe::1
+      remote: 2001:db8:cafe::2
+      ttl: 255

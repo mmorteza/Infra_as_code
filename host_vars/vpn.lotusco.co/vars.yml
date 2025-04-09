@@ -5,3 +5,41 @@ gateway_ipv6: 2001:db8:cafe::1
 remote_ipv4: 212.227.61.231
 local_ipv4: "{{ ansible_default_ipv4.address }}"
 mtu: 1400
+
+dhcp_listen_inf: tap_tap
+
+netplan_tunnels:
+  - interface_name: tun0
+    addresses:
+      - 2001:db8:cafe::2/64
+    parameters:
+      mode: sit
+      local: 185.105.239.186
+      remote: 212.227.61.231
+      mtu: 1400
+  - interface_name: gre6
+    addresses:
+      - 10.1.1.2/30
+    parameters:
+      mode: ip6gre
+      local: 2001:db8:cafe::2
+      remote: 2001:db8:cafe::1
+      ttl: 255
+
+netplan_ethernets:
+  - interface_name: tap_vpn
+    addresses:
+      - 192.168.130.1/24
+    routing-policy:
+      dest: 0.0.0.0/0
+      table: 1
+      from: 192.168.130.0/24
+      gw: 10.1.1.1
+  - interface_name: tap_soft
+    addresses:
+      - 192.168.131.1/24
+    routing-policy:
+      dest: 0.0.0.0/0
+      table: 1
+      from: 192.168.131.0/24
+      gw: 10.1.1.1

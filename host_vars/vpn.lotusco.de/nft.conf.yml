@@ -10,6 +10,9 @@ input_rules:
   - rule: iif "tunn0" counter accept
     comment: "Accept any on tunnel 0 interface"
 
+  - rule: iif "gre6" counter accept
+    comment: "Accept any on tunnel 0 interface"
+
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
@@ -57,10 +60,12 @@ output_rules:
   - ct state established,related counter accept
 
   # Allow traffic to the localhost IP address
-  - oif "lo" accept
-  - oif "ens6" accept
-  - oif "tunn0" accept
+  - oif "lo" counter accept
+  - oif "ens6" counter accept
+  - oif "tunn0" counter accept
+  - oif "gre6" counter accept
 
 nat_rules:
   # nat vpn clients to ens6
-  - ip saddr 192.168.130.0/24 oif "ens6" masquerade
+  - oif "ens6" ip saddr 192.168.130.0/24 masquerade
+  - oif "ens6" ip saddr 192.168.131.0/24 masquerade
