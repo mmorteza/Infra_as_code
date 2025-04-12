@@ -19,6 +19,12 @@ input_rules:
   - rule: udp dport 443 counter accept
     comment: allow openvpn connection to port 443
 
+  - rule: ip saddr 192.168.131.0/24 counter accept
+    comment: allow vpn client access
+  
+  - rule: ip saddr 192.168.130.0/24 counter accept
+    comment: allow vpn clients on hub VPN
+
   - rule: ip saddr 185.105.239.186/32 counter accept
     comment: Lotusco Iran VPN Server
   
@@ -69,3 +75,4 @@ nat_rules:
   # nat vpn clients to ens6
   - oif "ens6" ip saddr 192.168.130.0/24 masquerade
   - oif "ens6" ip saddr 192.168.131.0/24 masquerade
+  - oif "ens6" ip saddr 10.1.1.2/32 masquerade
