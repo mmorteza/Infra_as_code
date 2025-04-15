@@ -31,7 +31,6 @@ network:
 {% if iface['routing-policy'] is defined %}
       routing-policy:
         - from: {{ iface['routing-policy']['from'] }}
-          to: {{ iface['routing-policy']['dest'] }}
           table: {{ iface['routing-policy']['table'] }}
 {% endif %}
 {% if iface['gateway4'] is defined %}

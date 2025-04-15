@@ -6,8 +6,21 @@ remote_ipv4: 212.227.61.231
 local_ipv4: "{{ ansible_default_ipv4.address }}"
 mtu: 1400
 
+# Kernel Parameteras
+kernel_params:
+  - name: "net.ipv4.ip_forward"
+    value: 1
+  - name: "net.ipv6.conf.all.forwarding"
+    value: 1
+  - name: "net.ipv6.conf.default.forwarding"
+    value: 1
+  - name: "net.ipv4.tcp_mtu_probing"
+    value: 1
+  - name: "net.ipv4.tcp_base_mss"
+    value: 1024
 dhcp_listen_inf: tap_tap
 
+# Please add Interface tunnel and TAP conf as below
 netplan_tunnels:
   - interface_name: tun0
     addresses:
@@ -25,6 +38,16 @@ netplan_tunnels:
       local: 2001:db8:cafe::2
       remote: 2001:db8:cafe::1
       ttl: 255
+  - interface_name: lotus-ipip
+    addresses:
+      - 192.168.100.1/30
+    parameters:
+      mode: ipip
+      local: 185.105.239.186
+      remote: 81.12.121.42
+    routing-policy:
+      from: 192.168.100.0/30
+      table: 1
 
 netplan_ethernets:
   - interface_name: tap_vpn

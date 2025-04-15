@@ -19,6 +19,12 @@ input_rules:
   - rule: iif "tap_soft" counter accept
     comment: "Accept any on tunnel 0 interface"
 
+  - rule: iif "lotus-ipip" counter accept
+    comment: allow lotusco srcnat vpn client on tunnel
+
+  - rule: ip saddr 81.12.121.42/32 ip protocol ipip counter accept
+    comment: allow ipip tunnel from lotusco office
+
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
@@ -70,6 +76,7 @@ input_rules:
 forward_rules:
   - ip saddr 192.168.130.0/24 ip daddr 0.0.0.0/0 counter accept
   - ip saddr 192.168.131.0/24 ip daddr 0.0.0.0/0 counter accept
+  - ip saddr 192.168.100.0/30 ip daddr 0.0.0.0/0 counter accept
 
 output_rules:
   # Allow established and related connections
@@ -82,6 +89,7 @@ output_rules:
   - oif "gre6" counter accept
   - oif "tap_vpn" counter accept
   - oif "tap_soft" counter accept
+  - ip daddr 192.168.100.0/30 counter accept
 
   # DHCP client requests
   - udp dport 67 counter log accept

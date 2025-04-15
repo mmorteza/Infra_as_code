@@ -1,9 +1,11 @@
-interface: tun0
-
-routes:
-  - to: 192.168.130.0/24
-    via: 10.1.1.2
-    metric: 1
-  - to: 192.168.131.0/24
-    via: 10.1.1.2
-    metric: 1
+interfaces:
+  tun0:
+    - to: 192.168.130.0/24
+      via: 10.1.1.2
+      metric: 1
+    - to: 192.168.131.0/24
+      via: 10.1.1.2
+      metric: 1
+    - to: 192.168.100.0/30
+      via: 10.1.1.2
+      metric: 1

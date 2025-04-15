@@ -19,7 +19,7 @@ table inet filter {
     }
 
     chain forward {
-        type filter hook forward priority filter; policy accept;
+        type filter hook forward priority filter; policy drop;
 {% if forward_rules is defined and forward_rules %}
     {% for rule in forward_rules %}
         {{ rule}}

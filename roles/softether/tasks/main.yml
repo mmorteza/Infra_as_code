@@ -94,9 +94,11 @@
     daemon_reload: true
     state: started
 
-- name: Enable IP forwarding
+- name: Set Kernel Parameters(e.g ipv4 forwad)
   sysctl:
-    name: net.ipv4.ip_forward
-    value: "1"
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: true
     state: present
-    reload: yes
+    reload: true
+  with_items: "{{ kernel_params }}"

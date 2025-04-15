@@ -60,6 +60,8 @@ input_rules:
 
 forward_rules:
   - ip saddr 192.168.130.0/24 ip daddr 0.0.0.0/0 counter accept
+  - ip saddr 192.168.131.0/24 ip daddr 0.0.0.0/0 counter accept
+  - ip saddr 192.168.100.0/30 ip daddr 0.0.0.0/0 counter accept
 
 output_rules:
   # Allow established and related connections
@@ -76,3 +78,4 @@ nat_rules:
   - oif "ens6" ip saddr 192.168.130.0/24 masquerade
   - oif "ens6" ip saddr 192.168.131.0/24 masquerade
   - oif "ens6" ip saddr 10.1.1.2/32 masquerade
+  - oif "ens6" ip saddr 192.168.100.0/30 masquerade
