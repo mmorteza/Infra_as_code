@@ -30,7 +30,7 @@ netplan_tunnels:
       local: 185.105.239.186
       remote: 212.227.61.231
       mtu: 1400
-  - interface_name: gre6
+  - interface_name: gre64
     addresses:
       - 10.1.1.2/30
     parameters:

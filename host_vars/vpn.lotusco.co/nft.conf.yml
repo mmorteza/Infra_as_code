@@ -10,7 +10,7 @@ input_rules:
   - rule: iif "tun0" counter accept
     comment: "Accept any on tunnel 0 interface"
 
-  - rule: iif "gre6" counter accept
+  - rule: iif "gre64" counter accept
     comment: "Accept any on tunnel 0 interface"
 
   - rule: iif "tap_vpn" counter accept
@@ -86,7 +86,7 @@ output_rules:
   - oif "lo" counter accept
   - oif "eth0" counter accept
   - oif "tun0" counter accept
-  - oif "gre6" counter accept
+  - oif "gre64" counter accept
   - oif "tap_vpn" counter accept
   - oif "tap_soft" counter accept
   - ip daddr 192.168.100.0/30 counter accept

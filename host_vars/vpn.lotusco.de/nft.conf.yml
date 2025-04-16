@@ -16,8 +16,11 @@ input_rules:
   - rule: ct state invalid drop
     comment: Block unstablished traffics
 
+  - rule: tcp dport 443 counter accept
+    comment: allow openvpn connection on tcp port 443
+
   - rule: udp dport 443 counter accept
-    comment: allow openvpn connection to port 443
+    comment: allow openvpn connection on udp port 443
 
   - rule: ip saddr 192.168.131.0/24 counter accept
     comment: allow vpn client access
