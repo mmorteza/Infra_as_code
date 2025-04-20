@@ -17,11 +17,19 @@ netplan_tunnels:
       local: 212.227.61.231
       remote: 185.105.239.156
       mtu: 1400
-  - interface_name: gre6
+
+  - interface_name: tun1
     addresses:
       - 10.1.1.1/30
     parameters:
-      mode: ip6gre
+      mode: ipip6
       local: 2001:db8:cafe::1
       remote: 2001:db8:cafe::2
       ttl: 255
+    routes:
+      - to: 192.168.130.0/24
+        via: 10.1.1.2
+      - to: 192.168.131.0/24
+        via: 10.1.1.2
+      - to: 192.168.100.0/30
+        via: 10.1.1.2

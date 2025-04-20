@@ -52,7 +52,7 @@ common_users:
     uid: 10000
     shell: /bin/bash
     comment: "Lotusco Admin"
-    passwd: '$6$47xYBoDD/K2CvW/A$pvRHcOCEfXUk0xyhLNfAHexIrbCLr.gRXv6fO2JDuL8igTAHo5htA4nOLGA6X00tceDECgCotRKC.3hG/CvCe.'
+    passwd: '$6$jUh7hLKSpRa21x2a$Wc7zIV/KnDvLmGbwzXKeryXpDLFfh9RSiyDErNMgDzBcNdHMc.vTIXhxftBoB/m2feq3OrldrgxtMUXPWinS4/'
   - name: mosadeghi
     groups:
       - admin

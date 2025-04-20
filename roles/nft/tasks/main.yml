@@ -14,6 +14,7 @@
     name: nftables
     state: started
     enabled: true
+  ignore_errors: true
 
 - name: register status of /etc/nftables.d/
   stat:

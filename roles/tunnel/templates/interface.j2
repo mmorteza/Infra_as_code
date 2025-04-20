@@ -33,16 +33,30 @@ network:
         - from: {{ iface['routing-policy']['from'] }}
           table: {{ iface['routing-policy']['table'] }}
 {% endif %}
-{% if iface['gateway4'] is defined %}
+{% set has_routes = iface['gateway4'] is defined or iface['gateway6'] is defined or iface['routes'] is defined %}
+{% if has_routes %}
       routes:
+{% if iface['gateway4'] is defined %}
         - to: default
           via: "{{ iface['gateway4'] }}"
 {% endif %}
 {% if iface['gateway6'] is defined %}
-      routes:
         - to: default
           via: "{{ iface['gateway6'] }}"
           on-link: true
+{% endif %}
+{% if iface['routes'] is defined %}
+{% for route in iface['routes'] %}
+        - to: "{{ route.to }}"
+          via: "{{ route.via }}"
+{% if route.metric is defined %}
+          metric: {{ route.metric }}
+{% endif %}
+{% if route.table is defined %}
+          table: {{ route.table }}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endif %}
 {% if iface['nameservers'] is defined %}
       nameservers:

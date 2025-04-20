@@ -4,8 +4,15 @@
     dest: /etc/netplan/99-routes.yaml
     mode: '0600'
 
-- name: Apply Netplan configuration
-  command: netplan apply
+# - name: Clean tunnel configs befor apply netplan
+#   command: sudo ip link delete tun1
+
+# - name: Apply Netplan configuration
+#   command: netplan apply
+- name: Restart systemd-networkd 
+  command: systemctl restart systemd-networkd.service
+  ignore_errors: true
+  become: true
 
 - name: Copy iproute2 table configuration
   template:

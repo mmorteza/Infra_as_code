@@ -58,13 +58,21 @@
 #       Remote IPv4 address: {{ remote_ipv4 }}
 #       MTU: {{ mtu }}
 #       Protocol: SIT
+- name: Remove existing IPv6 tunnel toward de server
+  command: ip link delete tun1 type ipip6
+  ignore_errors: true
+
 - name: Create netplan configuration file for tunnel
   template:
     src: interface.j2
     dest: "/etc/netplan/tunnel.yaml"
     mode: '0600'
-#  when: netplan_tunnels is defined
-  notify: Apply netplan configuration
+
+- name: Restart systemd befor applying netplan
+  command: sudo systemctl restart systemd-networkd.service
+
+- name: apply netplan
+  command: sudo netplan apply
 
 # - name: Create netplan configuration file for tap interface
 #   template:
