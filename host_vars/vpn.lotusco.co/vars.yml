@@ -30,14 +30,18 @@ netplan_tunnels:
       local: 185.105.239.186
       remote: 212.227.61.231
       mtu: 1400
-  - interface_name: gre64
+  - interface_name: tun1
     addresses:
       - 10.1.1.2/30
     parameters:
-      mode: ip6gre
+      mode: ipip6
       local: 2001:db8:cafe::2
       remote: 2001:db8:cafe::1
       ttl: 255
+    routes:
+      - to: default
+        via: 10.1.1.1
+        table: 1
   - interface_name: lotus-ipip
     addresses:
       - 192.168.100.1/30

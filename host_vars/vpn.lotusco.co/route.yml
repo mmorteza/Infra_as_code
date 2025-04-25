@@ -13,7 +13,7 @@ interfaces:
       via: 185.105.239.1
     - to: 212.227.61.231/32
       via: 185.105.239.1
-  gre6:
+  tun1:
     - to: default
       via: 10.1.1.1
       table: 1
