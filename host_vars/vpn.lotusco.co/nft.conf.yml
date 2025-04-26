@@ -15,12 +15,6 @@ input_rules:
 
   - rule: iif "tun1" counter accept
     comment: "Accept any on tunnel 0 interface"
-<<<<<<< HEAD
-=======
-
-  # - rule: iif "tap_vpn" counter accept
-  #   comment: "Accept any on tunnel 0 interface"
->>>>>>> 51154f375b470235e2e05a011e7fb3010a672515
 
   - rule: iif "tap_soft" counter accept
     comment: "Accept any on tunnel 0 interface"
@@ -49,12 +43,9 @@ input_rules:
   - rule: ip protocol esp counter accept
     comment: accept ESP
 
-<<<<<<< HEAD
   - rule: ip saddr 212.227.61.231/32 counter log accept
     comment: DE server
 
-=======
->>>>>>> 51154f375b470235e2e05a011e7fb3010a672515
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,8443,5555,8088,8080 } counter accept
     comment: Lotusco Office
 
@@ -79,6 +70,9 @@ input_rules:
   - rule: ip saddr 185.78.23.43/32 tcp dport 8443 counter log accept
     comment: Morteza Sadeghi
 
+  - rule: ip saddr 185.78.23.43/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi
+
   - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi Spain
 
@@ -100,10 +94,7 @@ output_rules:
   - oif "eth0" counter accept
   - oif "tun0" counter accept
   - oif "tun1" counter accept
-<<<<<<< HEAD
-=======
   # - oif "tap_vpn" counter accept
->>>>>>> 51154f375b470235e2e05a011e7fb3010a672515
   - oif "tap_soft" counter accept
   - ip daddr 192.168.100.0/30 counter accept
 
