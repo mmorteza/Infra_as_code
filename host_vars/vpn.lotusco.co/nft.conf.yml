@@ -31,7 +31,7 @@ input_rules:
   - rule: tcp dport 1701 counter accept
     comment: allow L2TP
 
-  - rule: tcp dport 8088 counter accept
+  - rule: tcp dport 8888 counter accept
     comment: allow v2ray access
 
   - rule: udp dport { isakmp, ipsec-nat-t } counter accept
