@@ -3,16 +3,10 @@ input_rules:
 
   - rule: ct state established,related counter accept
     comment: Allow established and related connections
-
-<<<<<<< HEAD
-  - rule: ip saddr 185.105.239.186/32 counter accept 
+  
+  - rule: ip saddr 185.105.239.186/32 counter accept
     comment: Accept connection from IRAN VPN server
   
-=======
-  - rule: ip saddr 185.105.239.186/32 counter accept
-    comment: Lotusco Iran VPN Server
-
->>>>>>> 51154f375b470235e2e05a011e7fb3010a672515
   - rule: iif "lo" accept
     comment: "Allow traffic to the loopback interface"
 
@@ -30,6 +24,9 @@ input_rules:
 
   - rule: udp dport 443 counter accept
     comment: allow openvpn connection on udp port 443
+
+  - rule: ip saddr 185.140.4.98/32 tcp dport 8088 counter accept
+    comment: Morteza_Nider
 
   - rule: ip saddr 192.168.131.0/24 counter accept
     comment: allow vpn client access
@@ -79,10 +76,7 @@ output_rules:
   # Allow established and related connections
   - ct state established,related counter accept
   - ip daddr 185.105.239.186/32 counter accept
-<<<<<<< HEAD
-=======
 
->>>>>>> 51154f375b470235e2e05a011e7fb3010a672515
   # Allow traffic to the localhost IP address
   - oif "lo" counter accept
   - oif "ens6" counter accept
