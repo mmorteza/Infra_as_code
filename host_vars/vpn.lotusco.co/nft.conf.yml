@@ -46,6 +46,9 @@ input_rules:
   - rule: ip saddr 212.227.61.231/32 counter log accept
     comment: DE server
 
+  - rule: ip saddr 81.12.89.68/32 tcp dport 8888 counter accept
+    comment: Lotusco Warehouse
+
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,8443,5555,8088,8080 } counter accept
     comment: Lotusco Office
 
