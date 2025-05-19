@@ -36,17 +36,17 @@ input_rules:
 
   - rule: udp dport { isakmp, ipsec-nat-t } counter accept
     comment: "accept ISAKMP and IPsec NAT traversal"
-  
+
   - rule: udp dport { 1723, 3271 } counter accept
     comment: Allow vpn access
-  
+ 
   - rule: ip protocol esp counter accept
     comment: accept ESP
 
   - rule: ip saddr 212.227.61.231/32 counter log accept
     comment: DE server
 
-  - rule: ip saddr 81.12.89.68/32 tcp dport 8888 counter accept
+  - rule: ip saddr 81.12.89.68/32 tcp dport 8088 counter accept
     comment: Lotusco Warehouse
 
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,8443,5555,8088,8080 } counter accept
