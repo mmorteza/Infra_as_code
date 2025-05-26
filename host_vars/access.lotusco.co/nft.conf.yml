@@ -9,14 +9,14 @@ input_rules:
 
   - rule: ct state invalid drop
     comment: Block unstablished traffics
-  
+
   - rule: ip saddr 46.245.99.146/32 tcp dport { 443 } counter accept
     comment: Bourse Energy
 
   - rule: ip saddr 217.218.224.97/28 tcp dport 443 counter accept
     comment: Sayna karkhane
-  
-  - rule: ip saddr 91.99.185.139/32 tcp dport 443 counter accept
+
+  - rule: ip saddr 91.92.185.139/32 tcp dport 443 counter accept
     comment: Sayna Tehran office
 
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443 } counter accept
@@ -30,7 +30,7 @@ input_rules:
 
   - rule: ip saddr 185.78.23.43/32 tcp dport 443 counter log accept
     comment: Morteza Sadeghi
-  
+
   - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi
 
