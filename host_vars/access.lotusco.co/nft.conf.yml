@@ -22,6 +22,12 @@ input_rules:
   - rule: ip saddr 178.252.184.98/32 tcp dport 443 counter accept
     comment: Bourse Energy Motahari FMC
 
+  - rule: ip saddr 5.160.178.91/32 tcp dport 443 counter accept
+    comment: Zarin Royal
+
+  - rule: ip saddr 5.160.178.90/32 tcp dport 443 counter accept
+    comment: Zarin Royal
+
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443 } counter accept
     comment: Lotusco Office
 

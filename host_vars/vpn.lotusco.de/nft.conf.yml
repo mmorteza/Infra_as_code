@@ -28,6 +28,9 @@ input_rules:
   - rule: ip saddr 185.140.4.98/32 tcp dport 8088 counter accept
     comment: Morteza_Nider
 
+  - rule: ip saddr 185.140.4.108/32 tcp dport 8088 counter accept
+    comment: Morteza_Nider
+
   - rule: ip saddr 81.12.101.0/26 tcp dport 8088 counter accept
     comment: Morteza_Farshid
 
