@@ -16,8 +16,14 @@ input_rules:
   - rule: ip saddr 217.218.224.97/28 tcp dport 443 counter accept
     comment: Sayna karkhane
 
+  - rule: ip saddre 185.37.55.22/32 tcp dport 443 counter accept
+    comment: Tebyan WHMCS
+
   - rule: ip saddr 91.92.185.139/32 tcp dport 443 counter accept
     comment: Sayna Tehran office
+
+  - rule: ip saddr 212.227.61.231/32 tcp dport 443 counter accept
+    comment: De VPN server
 
   - rule: ip saddr 178.252.184.98/32 tcp dport 443 counter accept
     comment: Bourse Energy Motahari FMC

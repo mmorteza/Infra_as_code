@@ -16,11 +16,11 @@ input_rules:
   - rule: iif "tun1" counter accept
     comment: "Accept any on tunnel 0 interface"
 
-  - rule: iif "tap_soft" counter accept
-    comment: "Accept any on tunnel 0 interface"
+  # - rule: iif "tap_soft" counter accept
+  #   comment: "Accept any on tunnel 0 interface"
 
-  - rule: iif "lotus-ipip" counter accept
-    comment: allow lotusco srcnat vpn client on tunnel
+  # - rule: iif "lotus-ipip" counter accept
+  #   comment: allow lotusco srcnat vpn client on tunnel
 
   - rule: ip saddr 81.12.121.42/32 ip protocol ipip counter accept
     comment: allow ipip tunnel from lotusco office
@@ -48,6 +48,9 @@ input_rules:
 
   - rule: ip saddr 81.12.89.68/32 tcp dport 8088 counter accept
     comment: Lotusco Warehouse
+
+  - rule: ip saddr 77.68.66.19/32 tcp dport 443 counter accept
+    comment: UK Proxy server
 
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,8443,5555,8088,8080 } counter accept
     comment: Lotusco Office
@@ -79,6 +82,9 @@ input_rules:
   - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi Spain
 
+  - rule: ip saddr 194.164.175.18/32 tcp dport 443 counter accept
+    comment: Morteza Spain
+
   - rule: counter drop
     comment: "count dropped packets"
 
@@ -98,7 +104,7 @@ output_rules:
   - oif "tun0" counter accept
   - oif "tun1" counter accept
   # - oif "tap_vpn" counter accept
-  - oif "tap_soft" counter accept
+  # - oif "tap_soft" counter accept
   - ip daddr 192.168.100.0/30 counter accept
 
   # DHCP client requests

@@ -25,11 +25,14 @@ input_rules:
   - rule: udp dport 443 counter accept
     comment: allow openvpn connection on udp port 443
 
-  - rule: ip saddr 185.140.4.98/32 tcp dport 8088 counter accept
+  - rule: ip saddr 185.140.4.0/24 counter accept
     comment: Morteza_Nider
 
-  - rule: ip saddr 185.140.4.108/32 tcp dport 8088 counter accept
+  - rule: ip saddr 178.252.146.98/32 counter accept
     comment: Morteza_Nider
+
+  - rule: ip saddr 178.252.146.98/32 tcp dport 443 counter accept
+    comment: Morteza_Neither2
 
   - rule: ip saddr 81.12.101.0/26 tcp dport 8088 counter accept
     comment: Morteza_Farshid
