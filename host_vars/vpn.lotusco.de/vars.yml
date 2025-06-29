@@ -14,7 +14,7 @@ netplan_tunnels:
       - 2001:db8:cafe::1/64
     parameters:
       mode: sit
-      local: 212.227.61.231
+      local: 212.227.128.217
       remote: 185.105.239.156
       mtu: 1400
 

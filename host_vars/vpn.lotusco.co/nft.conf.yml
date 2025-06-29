@@ -4,7 +4,7 @@ input_rules:
   - rule: ct state established,related counter accept
     comment: Allow established and related connections
 
-  - rule: ip saddr 212.227.61.231/32 counter log accept
+  - rule: ip saddr 212.227.128.217/32 counter log accept
     comment: DE server
 
   - rule: iif "lo" accept
@@ -43,7 +43,7 @@ input_rules:
   - rule: ip protocol esp counter accept
     comment: accept ESP
 
-  - rule: ip saddr 212.227.61.231/32 counter log accept
+  - rule: ip saddr 212.227.128.217/32 counter log accept
     comment: DE server
 
   - rule: ip saddr 81.12.89.68/32 tcp dport 8088 counter accept
@@ -96,7 +96,7 @@ forward_rules:
 output_rules:
   # Allow established and related connections
   - ct state established,related counter accept
-  - ip daddr 212.227.61.231/32 counter log accept
+  - ip daddr 212.227.128.217/32 counter log accept
 
   # Allow traffic to the localhost IP address
   - oif "lo" counter accept
