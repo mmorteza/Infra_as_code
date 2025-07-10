@@ -1,0 +1,73 @@
+---
+input_rules:
+
+  - rule: ct state established,related counter accept
+    comment: Allow established and related connections
+
+  - rule: iif "lo" accept
+    comment: "Allow traffic to the loopback interface"
+
+  - rule: ct state invalid drop
+    comment: Block unstablished traffics
+
+  - rule: ip saddr 46.245.99.149/32 tcp dport { 443 } counter accept
+    comment: Bourse Energy Asiatech FMC
+
+  - rule: ip saddr 217.218.224.97/28 tcp dport 443 counter accept
+    comment: Sayna karkhane
+
+  - rule: ip saddr 185.37.55.22/32 tcp dport 443 counter accept
+    comment: Tebyan WHMCS
+
+  - rule: ip saddr 91.92.185.139/32 tcp dport 443 counter accept
+    comment: Sayna Tehran office
+
+  - rule: ip saddr 212.227.61.231/32 tcp dport 443 counter accept
+    comment: De VPN server
+
+  - rule: ip saddr 178.252.184.98/32 tcp dport 443 counter accept
+    comment: Bourse Energy Motahari FMC
+
+  - rule: ip saddr 79.127.82.195/32 tcp dport 443 counter accept
+    comment: Zarin Royal Asiatech
+
+  - rule: ip saddr 79.127.82.194/32 tcp dport 443 counter accept
+    comment: Zarin Royal Asiatech
+
+  - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443 } counter accept
+    comment: Lotusco Office
+
+  - rule: ip saddr 51.79.60.201/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi
+
+  - rule: ip saddr 185.78.23.74/32 tcp dport 443 counter log accept
+    comment: Splunk ES
+
+  - rule: ip saddr 185.78.23.43/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi
+
+  - rule: ip saddr 51.79.60.201/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi
+
+  - rule: ip saddr 185.78.23.43/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi
+
+  - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
+    comment: Morteza Sadeghi Spain
+
+  - rule: log level info drop
+    comment: Log and drop all other traffic
+
+forward_rules:
+# Add forward rules here
+
+output_rules:
+  # Allow established and related connections
+  - ct state established,related counter accept
+
+  # Allow traffic to the localhost IP address
+  - oif "lo" accept
+  - oif "eth0" accept
+
+  # Log and drop all other traffic
+  - log level info drop
