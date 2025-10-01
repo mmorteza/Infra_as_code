@@ -13,6 +13,9 @@ input_rules:
   - rule: iif "tunn0" counter accept
     comment: "Accept any on tunnel 0 interface"
 
+  - rule: iif "tun0" counter accept
+    comment: "Accept any on tunnel 0 wiregurd interface"
+
   - rule: iif "tun1" counter accept
     comment: "Accept any on tunnel 0 interface"
 
@@ -90,6 +93,7 @@ output_rules:
   - oif "lo" counter accept
   - oif "ens6" counter accept
   - oif "tunn0" counter accept
+  - oif "tun0" counter accept
   - oif "tun1" counter accept
 
 nat_rules:

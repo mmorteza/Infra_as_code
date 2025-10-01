@@ -15,6 +15,9 @@ input_rules:
 
   - rule: ip saddr 217.218.224.97/28 tcp dport 443 counter accept
     comment: Sayna karkhane
+  
+  - rule: ip saddr 109.201.27.131/32 tcp dport 443 counter accept
+    comment: Amozesh 0 Parvaresh
 
   - rule: ip saddr 185.37.55.22/32 tcp dport 443 counter accept
     comment: Tebyan WHMCS
@@ -67,20 +70,21 @@ output_rules:
 
   # Allow traffic to the localhost IP address
   - oif "lo" accept
+  - oif "ens6" counter accept
 
-  # DHCP client requests
-  - udp dport 67 counter log accept
-  - udp dport 68 counter log accept
+  # # DHCP client requests
+  # - udp dport 67 counter log accept
+  # - udp dport 68 counter log accept
 
-    # DNS requests
-  - udp dport 53 counter log accept
+  #   # DNS requests
+  # - udp dport 53 counter log accept
 
-  # Allow web connection traffic
-  - tcp dport 443 counter log accept
-  - tcp dport 80 counter log accept
+  # # Allow web connection traffic
+  # - tcp dport 443 counter log accept
+  # - tcp dport 80 counter log accept
 
-  # Allow icmp ping check
-  - icmp type echo-request accept
+  # # Allow icmp ping check
+  # - icmp type echo-request accept
 
-  # Log and drop all other traffic
+  # # Log and drop all other traffic
   - log level info drop

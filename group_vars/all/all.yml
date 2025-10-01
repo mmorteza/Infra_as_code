@@ -25,43 +25,6 @@ se_require_packages:
   - libpthread-stubs0-dev
   - make
 
-# groups 
-common_groups:
-  - name: admin
-    gid: 10000
-  - name: squid
-    gid: 2000
-
-# the below group/groups will added into sudoers file that can run priviledge command w/o password
-sudoer_groups:
-  - admin
-
-# Users 
-service_users:
-  - name: squid
-    groups:
-      - squid
-    uid: 2000
-    shell: /sbin/nologin
-
-common_users:
-  - name: lotusco
-    groups:
-      - admin
-      - sudo
-    uid: 10000
-    shell: /bin/bash
-    comment: "Lotusco Admin"
-    passwd: '$6$jUh7hLKSpRa21x2a$Wc7zIV/KnDvLmGbwzXKeryXpDLFfh9RSiyDErNMgDzBcNdHMc.vTIXhxftBoB/m2feq3OrldrgxtMUXPWinS4/'
-  - name: mosadeghi
-    groups:
-      - admin
-      - sudo
-    uid: 1000
-    shell: /bin/bash
-    comment: "Morteza Sadeghi"
-    passwd: '$6$s6oEFs3oEmBWiyDC$JG8C8j/SRK37dh/cJyXa49wTzCLAkiLMQqqFV9JmitLiu0hOqLK6oeqU5WdyYqhdRfQtsuVQ0NrOwhNoPJijE.'
-
 common_packages:
   - apache2-utils
   - python3-passlib
@@ -70,10 +33,11 @@ common_packages:
   - curl
   - fail2ban
   - jq
-  - iproute2
+
 
 v2ray_packages:
   - wget
   - curl
   - tar
   - tzdata
+  - iproute2
