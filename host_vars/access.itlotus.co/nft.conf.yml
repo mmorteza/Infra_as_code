@@ -58,13 +58,13 @@ input_rules:
   - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
     comment: Morteza Sadeghi Spain
 
-  - rule: ip saddr 176.122.211.26/32 tcp dport 22 counter log accept
+  - rule: ip saddr 176.122.211.26/32 tcp dport 7213 counter log accept
     comment: silane-sabz1
 
-  - rule: ip saddr 185.83.199.50/32 tcp dport 22 counter log accept
+  - rule: ip saddr 185.83.199.50/32 tcp dport 7213 counter log accept
     comment: silane-sabz2
 
-  - rule: ip saddr 185.142.92.248/32 tcp dport 22 counter log accept
+  - rule: ip saddr 185.142.92.248/32 tcp dport 7213 counter log accept
     comment: silane-sabz3
   
   - rule: log level info drop
