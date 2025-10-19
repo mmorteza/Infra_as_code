@@ -15,7 +15,7 @@ input_rules:
 
   - rule: ip saddr 217.218.224.97/28 tcp dport 7213 counter accept
     comment: Sayna karkhane
-  
+
   - rule: ip saddr 109.201.27.131/32 tcp dport 7213 counter accept
     comment: Amozesh 0 Parvaresh
 
@@ -69,10 +69,10 @@ input_rules:
 
   - rule: ip saddr 46.209.239.222/32 tcp dport 7213 counter log accept
     comment: Kardan
-  
-  - rule: ip saddr 87.107.103.242/32 tcp dport 443 counter accep
+
+  - rule: ip saddr 87.107.103.242/32 tcp dport 7213 counter accept
     comment: Kavan-FG40-F
-  
+
   - rule: log level info drop
     comment: Log and drop all other traffic
 
