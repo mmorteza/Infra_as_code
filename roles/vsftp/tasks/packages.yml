@@ -1,0 +1,15 @@
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Update cache
+  apt:
+    update_cache: true
+  ignore_errors: True
+
+- name: Install common packages if they are not installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ vsftpd_packages }}"
+  when: "'{{ item }}' not in ansible_facts.packages"

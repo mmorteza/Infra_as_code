@@ -1,0 +1,58 @@
+- name: determined groups
+  getent:
+    database: group
+
+- name: determined groups
+  getent:
+    database: passwd
+
+- name: Create the groups
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  when: 
+    - "'{{ item.name }}' not in ansible_facts.getent_group"
+  loop: "{{ common_groups }}"
+
+- name: Create common user accounts
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups | join(',') }}"
+    uid: "{{ item.uid }}"
+    shell: "{{ item.shell }}"
+    password: "{{ item.passwd }}"
+    update_password: always
+    append: true
+#  when: "'{{ item.name }}' not in ansible_facts.getent_passwd"
+  ignore_errors: true
+  loop: "{{ common_users }}"
+
+- name: Create ftp user accounts
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups | join(',') }}"
+    uid: "{{ item.uid }}"
+    shell: "{{ item.shell }}"
+    password: "{{ item.passwd }}"
+    update_password: always
+    append: true
+#  when: "'{{ item.name }}' not in ansible_facts.getent_passwd"
+  ignore_errors: true
+  loop: "{{ ftp_users }}"
+
+- name: add users to sudoers file # The specific groups running sudo without password
+  community.general.sudoers:
+    name: admins-no-password
+    group: admin
+    nopassword: true
+    state: present
+    validation: required
+    commands: ALL
+
+- name: Upload SSH keys if not present
+  ansible.builtin.authorized_key:
+    user: "{{ item.0.name }}"
+    state: present
+    key: "{{ item.1 }}"
+    manage_dir: true
+  loop: "{{ ssh_users | subelements('key') }}"

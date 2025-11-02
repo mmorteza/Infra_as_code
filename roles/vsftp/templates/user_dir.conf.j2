@@ -1,0 +1,5 @@
+# Managed By ansible
+{% for usr in ftp_users %}
+local_root={{ usr.home }}
+{% endfor %}
+write_enable=NO

@@ -1,0 +1,9 @@
+- name: Restart vsftp
+  systemd:
+    name: vsftpd
+    state: restarted
+
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted

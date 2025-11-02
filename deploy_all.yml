@@ -17,4 +17,6 @@
       tags: ['route']
     - role: tunnel
       tags: ['tunnel']
+    - role: vsftp
+      tags: ['ftp']
 

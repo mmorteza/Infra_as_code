@@ -2,12 +2,18 @@
 common_groups:
   - name: admin
     gid: 10000
+
+proxy_server_groups:
   - name: squid
     gid: 2000
 
 # the below group/groups will added into sudoers file that can run priviledge command w/o password
 sudoer_groups:
   - admin
+
+ftp_user_group:
+  - name: ftpusers
+    gid: 2002
 
 # Users 
 service_users:
@@ -40,3 +46,31 @@ ssh_users:
     key: 
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnsG0JUNHqqEzGbxTG/nYooEXVEnDOfBB2fYzbWeHSp sadeghi@tebyanidc.ir" 
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK7ieuhmDyRM3CmqHhIag38aZooiJ5yxb2MKj0KqzdzW morteza.sadeghi@outlook.com"
+
+ftp_users:
+  - name: morteza
+    shell: /bin/ftponly
+    uid: 2001
+    groups:
+      - ftpusers
+    comment: "Morteza Sadeghi"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$ovCqm3/vEF75.64y$X8ThpzgWQR4TRbxpRIhH4fC896NlJWRDyfNHPb4I4y6b1QA.p0YUGpWFVy.PzCKfpvdskflxy3ZfdJwK.8WrI0'
+
+  - name: lotuscof
+    shell: /bin/ftponly
+    uid: 2004
+    groups:
+      - ftpusers
+    comment: "Lotus FG-40F"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$nOhIE6LABHFPePBG$/LfA7w2V8MY.IrN6Z51dgKzsvTBukDV2O19m7BHmSBR8/Sl5P7GfxMlx1o2wY4k/JgGOhTPH/6LNMWmzrfGU9.'
+
+  - name: artebataren
+    shell: /bin/ftponly
+    uid: 2004
+    groups:
+      - ftpusers
+    comment: "artebataren FG-70G"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$8N6ynOZCPaqgneF/$xP6qbT9M0RvwuLsHrCl.jaUfLN/Kl1X5dgAe3cIhBm8cdINB4xY.kx6hyLm7vzRlVLX6Di9aivEZDeEwWS7hb0'

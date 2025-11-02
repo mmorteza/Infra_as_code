@@ -1,0 +1,54 @@
+input_rules:
+  - rule: ct state established,related counter accept
+    comment: Allow established and related connections
+  - rule: iif "lo" accept
+    comment: "Allow traffic to the loopback interface"
+  - rule: ip saddr 185.78.23.43/32 counter accept
+    comment: Morteza Sadeghi
+  - rule: ip saddr 81.12.121.42 tcp dport @ssh accept
+    comment: lotusco
+  - rule: ip saddr 81.12.121.42 tcp dport @ftp_port accept
+    comment: lotusco
+  - rule: ip saddr 81.12.121.42 tcp dport @ftp_pasv_ports accept
+    comment: lotusco
+  - rule: ip saddr 81.12.121.42 tcp dport 990 accept
+    comment: lotusco
+  - rule: ip saddr 2.186.115.184 tcp dport @ftp_port accept
+    comment: Ertebat Aren
+  - rule: ip saddr 2.186.115.184 tcp dport @ftp_pasv_ports accept
+    comment: Ertebat Aren
+  - rule: log level info drop
+    comment: Log and drop all other traffic
+
+forward_rules:
+# Add forward rules here
+
+output_rules:
+  # Allow established and related connections
+  - ct state established,related counter accept
+
+  # Allow traffic to the localhost IP address
+  - oif "lo" accept
+
+  # DHCP client requests
+  - udp dport 67 counter log accept
+  - udp dport 68 counter log accept
+
+    # DNS requests
+  - udp dport 53 counter log accept
+
+  # Allow web connection traffic
+  - tcp dport 443 counter log accept
+  - tcp dport 80 counter log accept
+
+  # Allow icmp ping check
+  - icmp type echo-request accept
+
+  # Log and drop all other traffic
+  - log level info drop
+
+nft_service_ports:
+  ftp_port: [20, 21]
+  dns_ports: [53]
+  ftp_pasv_ports: ["40000-50000"]
+  ssh: [22]

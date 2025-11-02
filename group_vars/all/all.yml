@@ -41,3 +41,9 @@ v2ray_packages:
   - tar
   - tzdata
   - iproute2
+
+vsftpd_packages:
+  - vsftpd
+  - htop
+  - iotop
+

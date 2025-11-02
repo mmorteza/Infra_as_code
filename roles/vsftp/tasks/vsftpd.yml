@@ -1,0 +1,35 @@
+- name: config vsftp on /etc/vsftpd.conf
+  template:
+    src: vsftp.conf.j2
+    dest: /etc/vsftpd.conf
+    mode: '0644'
+    owner: root
+    group: root
+    backup: true
+
+- name: createing seperate directory for advance vsftpd configuration
+  file:
+    path: /etc/vsftpd.conf.d/
+    state: directory
+    owner: root
+    group: root
+    mode: '0654'
+  register: vsftpd_d
+
+- name: updating userlists for ftp access
+  template:
+    src: users_allow_list.j2
+    dest: /etc/vsftpd.conf.d/vsftpd.userlist
+    mode: 0644
+    owner: root
+    group: root
+
+- name: updating ftp user specifi config on /etc/vsftpd.conf.d/
+  template:
+    src: user_dir.conf.j2
+    dest: /etc/vsftpd.conf.d/{{ item.name }}
+    mode: 644
+    group: root
+    owner: root
+  with_items: "{{ ftp_users }}"
+
