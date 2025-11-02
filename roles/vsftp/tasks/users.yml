@@ -14,6 +14,14 @@
     - "'{{ item.name }}' not in ansible_facts.getent_group"
   loop: "{{ common_groups }}"
 
+- name: Create ftp user group
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  when:
+    - "'{{ item.name }}' not in ansible_facts.getent_group"
+  loop: "{{ ftp_user_group }}"
+
 - name: Create common user accounts
   user:
     name: "{{ item.name }}"

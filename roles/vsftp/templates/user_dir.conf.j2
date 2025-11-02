@@ -1,5 +1,3 @@
 # Managed By ansible
-{% for usr in ftp_users %}
-local_root={{ usr.home }}
-{% endfor %}
+local_root={{ item.home }}
 write_enable=NO

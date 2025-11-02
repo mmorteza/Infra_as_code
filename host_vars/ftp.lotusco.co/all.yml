@@ -1,4 +1,4 @@
-user_home_dir: "/etc/vsftpd_user_conf"
+user_home_dir: "/etc/vsftpd.conf.d/"
 pasv_min_port_range: 40000
 pasv_max_port_range: 50000
-user_list_file: "/etc/vsftpd.userlist"
+user_list_file: "/etc/vsftpd.conf.d/vsftpd.userlist"

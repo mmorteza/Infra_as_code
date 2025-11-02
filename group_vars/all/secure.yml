@@ -36,7 +36,7 @@ common_users:
     groups:
       - admin
       - sudo
-    uid: 1000
+    uid: 1003
     shell: /bin/bash
     comment: "Morteza Sadeghi"
     passwd: '$6$s6oEFs3oEmBWiyDC$JG8C8j/SRK37dh/cJyXa49wTzCLAkiLMQqqFV9JmitLiu0hOqLK6oeqU5WdyYqhdRfQtsuVQ0NrOwhNoPJijE.'
@@ -55,7 +55,7 @@ ftp_users:
       - ftpusers
     comment: "Morteza Sadeghi"
     home: "/home/fortigate/7.2"
-    passwd: '$6$ovCqm3/vEF75.64y$X8ThpzgWQR4TRbxpRIhH4fC896NlJWRDyfNHPb4I4y6b1QA.p0YUGpWFVy.PzCKfpvdskflxy3ZfdJwK.8WrI0'
+    passwd: '$6$0h7IzJseIhfnGXFb$hsW5wiPsYT00RyYXMxlRBM4fhCbnNpMi1vgdKhM3FMqrpLGnDTI2I4h1gtjLiMpMudDPOK8Klay5vLNpv2dxj1'
 
   - name: lotuscof
     shell: /bin/ftponly
@@ -68,7 +68,7 @@ ftp_users:
 
   - name: artebataren
     shell: /bin/ftponly
-    uid: 2004
+    uid: 2005
     groups:
       - ftpusers
     comment: "artebataren FG-70G"
