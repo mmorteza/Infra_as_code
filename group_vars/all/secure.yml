@@ -48,24 +48,6 @@ ssh_users:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK7ieuhmDyRM3CmqHhIag38aZooiJ5yxb2MKj0KqzdzW morteza.sadeghi@outlook.com"
 
 ftp_users:
-  - name: morteza
-    shell: /bin/ftponly
-    uid: 2001
-    groups:
-      - ftpusers
-    comment: "Morteza Sadeghi"
-    home: "/home/fortigate/7.2"
-    passwd: '$6$0h7IzJseIhfnGXFb$hsW5wiPsYT00RyYXMxlRBM4fhCbnNpMi1vgdKhM3FMqrpLGnDTI2I4h1gtjLiMpMudDPOK8Klay5vLNpv2dxj1'
-
-  - name: lotuscof
-    shell: /bin/ftponly
-    uid: 2004
-    groups:
-      - ftpusers
-    comment: "Lotus FG-40F"
-    home: "/home/fortigate/7.2"
-    passwd: '$6$nOhIE6LABHFPePBG$/LfA7w2V8MY.IrN6Z51dgKzsvTBukDV2O19m7BHmSBR8/Sl5P7GfxMlx1o2wY4k/JgGOhTPH/6LNMWmzrfGU9.'
-
   - name: artebataren
     shell: /bin/ftponly
     uid: 2005
@@ -74,3 +56,37 @@ ftp_users:
     comment: "artebataren FG-70G"
     home: "/home/fortigate/7.2"
     passwd: '$6$8N6ynOZCPaqgneF/$xP6qbT9M0RvwuLsHrCl.jaUfLN/Kl1X5dgAe3cIhBm8cdINB4xY.kx6hyLm7vzRlVLX6Di9aivEZDeEwWS7hb0'
+    pass_max_days: 365
+    pass_warn_days: 14
+
+  - name: miras
+    shell: /bin/ftponly
+    uid: 2006
+    groups:
+      - ftpusers
+    comment: "Miras Farhangi FG-600F"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$Q3WCangTIbWny22c$rGkPGP0hevfr6wbukGbFQ7YkbHGHDsItTZOr8zCerVQaamxkKfksOE/XC5IZfRl87ANy4QGyYvhe18Cl13baD.'
+    pass_max_days: 365
+    pass_warn_days: 14
+
+  - name: morteza
+    shell: /bin/ftponly
+    uid: 2001
+    groups:
+      - ftpusers
+    comment: "Morteza Sadeghi"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$0h7IzJseIhfnGXFb$hsW5wiPsYT00RyYXMxlRBM4fhCbnNpMi1vgdKhM3FMqrpLGnDTI2I4h1gtjLiMpMudDPOK8Klay5vLNpv2dxj1'
+    pass_max_days: 99999
+    pass_warn_days: 7
+  - name: lotuscof
+    shell: /bin/ftponly
+    uid: 2004
+    groups:
+      - ftpusers
+    comment: "Lotus FG-40F"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$nOhIE6LABHFPePBG$/LfA7w2V8MY.IrN6Z51dgKzsvTBukDV2O19m7BHmSBR8/Sl5P7GfxMlx1o2wY4k/JgGOhTPH/6LNMWmzrfGU9.'
+    pass_max_days: 99999
+    pass_warn_days: 7

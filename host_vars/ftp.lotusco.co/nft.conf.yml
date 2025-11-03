@@ -17,6 +17,10 @@ input_rules:
     comment: Ertebat Aren
   - rule: ip saddr 2.186.115.184 tcp dport @ftp_pasv_ports accept
     comment: Ertebat Aren
+  - rule: ip saddr  89.37.10.130/32 tcp dport @ftp_pasv_ports counter accept
+    comment: Miras Farhangi
+  - rule: ip saddr  89.37.10.130/32 tcp dport @ftp_port counter accept
+    comment: Miras Farhangi
   - rule: log level info drop
     comment: Log and drop all other traffic
 

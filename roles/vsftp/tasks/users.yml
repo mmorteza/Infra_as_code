@@ -44,6 +44,8 @@
     password: "{{ item.passwd }}"
     update_password: always
     append: true
+    password_expire_max: "{{ item.pass_max_days }}"
+    password_expire_warn: "{{ item.pass_warn_days }}"
 #  when: "'{{ item.name }}' not in ansible_facts.getent_passwd"
   ignore_errors: true
   loop: "{{ ftp_users }}"

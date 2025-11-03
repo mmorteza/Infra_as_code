@@ -24,7 +24,7 @@
     owner: root
     group: root
 
-- name: updating ftp user specifi config on /etc/vsftpd.conf.d/
+- name: creating ftp user specifi config on /etc/vsftpd.conf.d/
   template:
     src: user_dir.conf.j2
     dest: /etc/vsftpd.conf.d/{{ item.name }}
@@ -32,4 +32,3 @@
     group: root
     owner: root
   with_items: "{{ ftp_users }}"
-
