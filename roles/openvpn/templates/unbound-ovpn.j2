@@ -1,0 +1,7 @@
+server:
+  interface: {{ openvpn_server_ip }}
+  access-control: {{ openvpn_network }}/24 allow
+  hide-identity: yes
+  hide-version: yes
+  use-caps-for-id: yes
+  prefetch: yes

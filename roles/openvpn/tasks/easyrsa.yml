@@ -1,0 +1,11 @@
+- name: Copy EasyRSA directory
+  copy:
+    src: easyrsa/
+    dest: /etc/openvpn/easyrsa/
+    mode: 0755
+
+- name: Initialize PKI
+  command: ./easyrsa init-pki
+  args:
+    chdir: /etc/openvpn/easyrsa
+  creates: /etc/openvpn/easyrsa/pki

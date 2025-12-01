@@ -1,0 +1,50 @@
+openvpn_ip: "203.0.113.10"
+openvpn_public_ip: "vpn.example.com"
+openvpn_port: 1194
+openvpn_protocol: "udp"
+openvpn_ipv6_support: false
+
+# DNS Options
+openvpn_dns_choice: "custom"   # unbound | system | cloudflare | quad9 | google | custom
+openvpn_custom_dns1: "192.168.20.1"
+openvpn_custom_dns2: "192.168.20.2"
+
+# Compression
+openvpn_compression_enabled: false
+openvpn_compression: "lz4-v2"  # only if enabled
+
+# Crypto
+openvpn_cipher: "AES-128-GCM"
+openvpn_cert_type: "ecdsa"  # ecdsa | rsa
+openvpn_cert_curve: "prime256v1"
+openvpn_rsa_key_size: 2048
+openvpn_hmac_alg: "SHA256"
+openvpn_tls_sig: "tls-crypt"
+openvpn_auth: "SHA256"
+# Diffie-Hellman
+openvpn_dh_type: "ecdh"  # ecdh | dh
+openvpn_ecdh_curve: "prime256v1"
+
+# Unbound
+openvpn_use_unbound: false
+
+# Internal settings
+openvpn_network: "172.16.3.0"
+openvpn_netmask: "255.255.255.0"
+dns_ip: "192.168.20.1"
+
+# client configuration directory
+client_config_dir: /etc/openvpn/ccd
+openvpn_client_name: "client1"
+
+openvpn_client_export_dir: /opt/openvpn/clients
+openvpn_gauth_dir: /opt/openvpn/google-auth
+
+easyrsa_dir: /etc/openvpn/pki
+pki_dir: "{{ easyrsa_dir }}/pki"
+
+openvpn_pki_dir: /etc/openvpn/pki
+
+route_dest_1: "route 172.18.0.0 255.255.255.0"
+route_dest_2: "route 172.19.0.0 255.255.255.0"
+route_dest_3: "route 172.20.0.0 255.255.255.0"

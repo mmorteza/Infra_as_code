@@ -1,0 +1,21 @@
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Install OpenVPN and dependencies on Debian base Dist
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ ovpn_require_packages }}"
+  when:
+    - "'{{ item }}' not in ansible_facts.packages"
+    - (ansible_distribution == "Ubuntu" or ansible_os_family == "Debian")
+  
+- name: Install OpenVPN and dependencies on RHEL base Dist
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ ovpn_require_packages }}"
+  when:
+    - "'{{ item }}' not in ansible_facts.packages"
+    - (ansible_distribution != "Ubuntu" or ansible_os_family != "Debian")

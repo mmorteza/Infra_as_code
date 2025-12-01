@@ -1,0 +1,51 @@
+port {{ openvpn_port }}
+proto {{ openvpn_protocol }}
+
+plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so "openvpn login USERNAME password PASSWORD pin OTP"
+username-as-common-name
+
+topology subnet
+server {{ openvpn_network }} {{ openvpn_netmask }}
+client-config-dir {{ client_config_dir }}
+
+{% if openvpn_ipv6_support %}
+server-ipv6 fd00:1234:5678:9000::/64
+{% endif %}
+
+ifconfig-pool-persist ipp.txt
+push "dhcp-option DNS {{ dns_ip }}"
+push "{{ route_dest_1 }}"
+push "{{ route_dest_2 }}"
+push "{{ route_dest_3}}"
+
+dev tun
+user nobody
+group nogroup
+persist-key
+persist-tun
+
+tls-crypt tls-crypt.key
+crl-verify crl.pem
+
+cipher {{ openvpn_cipher }}
+auth {{ openvpn_auth }}
+ca {{ openvpn_pki_dir }}/pki/ca.crt
+cert {{ openvpn_pki_dir }}/pki/issued/server.crt
+key {{ openvpn_pki_dir }}/pki/private/server.key
+
+{% if openvpn_compression_enabled %}
+compress {{ openvpn_compression }}
+{% endif %}
+
+{% if openvpn_dh_type == 'ecdh' %}
+ecdh-curve {{ openvpn_ecdh_curve }}
+{% else %}
+dh {{ openvpn_pki_dir }}/pki/dh.pem
+{% endif %}
+ncp-ciphers AES-256-CBC
+tls-server
+tls-version-min 1.2
+tls-cipher TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384
+status /var/log/openvpn/status.log
+keepalive 10 120
+verb 3

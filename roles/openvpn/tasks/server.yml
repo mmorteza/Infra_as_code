@@ -1,0 +1,5 @@
+- name: Deploy OpenVPN configuration on /etc/openvpn/server/server.conf
+  template:
+    src: server.conf.j2
+    dest: "{{ openvpn_server_conf }}"
+  notify: restart openvpn

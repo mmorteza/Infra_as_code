@@ -1,0 +1,9 @@
+- name: restart unbound
+  service:
+    name: unbount
+    state: restarted
+
+- name: restart openvpn
+  service:
+    name: "{{ openvpn_service }}"
+    state: restarted

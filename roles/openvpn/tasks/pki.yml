@@ -1,0 +1,34 @@
+- name: Create PKI directory
+  file:
+    path: "{{ openvpn_pki_dir }}"
+    state: directory
+    mode: '0700'
+
+
+- name: Initialize PKI
+  command: easyrsa init-pki
+  args:
+    chdir: "{{ openvpn_pki_dir }}"
+    creates: "{{ openvpn_pki_dir }}/pki"
+
+
+# - name: Build CA
+#   command: easyrsa build-ca nopass
+#   args:
+#     chdir: "{{ openvpn_pki_dir }}"
+#     creates: "{{ openvpn_pki_dir }}/pki/ca.crt"
+
+
+# - name: Generate server certificate
+#   command: easyrsa build-server-full server nopass
+#   args:
+#     chdir: "{{ openvpn_pki_dir }}"
+#     creates: "{{ openvpn_pki_dir }}/pki/issued/server.crt"
+
+
+# - name: Generate DH params (if RSA)
+#   command: easyrsa gen-dh
+#   when: openvpn_cert_type == "rsa"
+#   args:
+#     chdir: "{{ openvpn_pki_dir }}"
+#     creates: "{{ openvpn_pki_dir }}/pki/dh.pe m"

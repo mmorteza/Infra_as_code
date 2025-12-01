@@ -1,0 +1,16 @@
+- name: Install OpenVPN
+  include_tasks: install.yml
+
+- name: Setup PKI
+  include_tasks: pki.yml
+
+- name: Configure openvpn server
+  include_tasks: server.yml
+
+- name: Install Unbound
+  when: openvpn_use_unbound
+  include_tasks: unbound.yml
+
+- name: Generate client configuration
+  include_tasks: client.yml
+

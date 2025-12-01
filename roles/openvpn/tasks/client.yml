@@ -1,0 +1,11 @@
+# - name: Generate client certificate
+#   command: easyrsa build-client-full {{ openvpn_client_name }} nopass
+#   args:
+#     chdir: "{{ openvpn_pki_dir }}"
+#     creates: "{{ openvpn_pki_dir }}/pki/issued/{{ openvpn_client_name }}.crt"
+
+
+- name: Create inline .ovpn file
+  template:
+    src: client.conf.j2
+    dest: "/root/{{ openvpn_client_name }}.ovpn"

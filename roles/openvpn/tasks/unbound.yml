@@ -1,0 +1,10 @@
+- name: Install Unbound
+  apt:
+    name: unbound
+    state: present
+
+- name: Deploy Unbound OpenVPN config
+  template:
+    src: unbound-ovpn.j2
+    dest: /etc/unbound/unbound.conf.d/openvpn.conf
+  notify: restart unbound

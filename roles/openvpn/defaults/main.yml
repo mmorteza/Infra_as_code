@@ -1,0 +1,3 @@
+openvpn_service: openvpn-server@server
+openvpn_server_conf: /etc/openvpn/server/server.conf
+openvpn_pki_dir: /etc/openvpn/pki
