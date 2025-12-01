@@ -70,6 +70,9 @@ input_rules:
   - rule: ip saddr 46.209.239.222/32 tcp dport 7213 counter log accept
     comment: Kardan
 
+  - rule: ip saddr 91.92.206.246/32 tcp dport 7213 counter log accept
+    comment: Satrab_saghafi
+
   - rule: ip saddr 87.107.103.242/32 tcp dport 7213 counter accept
     comment: Kavan-FG40-F
 

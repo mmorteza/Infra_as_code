@@ -73,6 +73,9 @@ input_rules:
   - rule: ip saddr 87.107.103.242/32 tcp dport 443 counter accept
     comment: Kavan-FG40-F
 
+  - rule: ip saddr 91.92.206.246/32 tcp dport 7213 counter log accept
+    comment: Satrab_saghafi
+
   - rule: log level info drop
     comment: Log and drop all other traffic
 

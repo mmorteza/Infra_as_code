@@ -6,6 +6,7 @@ flush ruleset
 include "/etc/nft/nftables.d/*.rules"
 
 table inet filter {
+    {% if nft_service_ports is defined %}
     {% for name, ports in nft_service_ports.items() %}
     set {{ name }} {
         type inet_service
@@ -13,6 +14,7 @@ table inet filter {
         elements = { {{ ports | join(", ") }} }
     }
     {% endfor %}
+    {% endif %}
 
     chain input {
         type filter hook input priority 0; policy drop;

@@ -47,3 +47,12 @@ vsftpd_packages:
   - htop
   - iotop
 
+ovpn_require_packages:
+  - wget
+  - curl
+  - openvpn
+  - easy-rsa
+  - libpam-google-authenticator
+  - qrencode
+
+
