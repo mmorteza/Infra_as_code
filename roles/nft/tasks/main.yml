@@ -51,5 +51,5 @@
   template:
     src: nft.conf.j2
     dest: /etc/nftables.conf
-  notify: Reload nftables
+  notify: Restart nftables
 
