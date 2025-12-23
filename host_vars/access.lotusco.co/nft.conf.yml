@@ -70,20 +70,23 @@ input_rules:
   - rule: ip saddr 46.209.239.222/32 tcp dport 443 counter log accept
     comment: Kardan
 
-  - rule: ip saddr 87.107.103.242/32 tcp dport 443 counter accept
+  - rule: ip saddr 87.107.103.242/32 tcp dport 443 counter log accept
     comment: Kavan-FG40-F
 
   - rule: ip saddr 91.92.206.246/32 tcp dport 443 counter log accept
     comment: Satrab_saghafi
 
-  - rule: ip saddr 46.209.112.242/32 tcp dport 443 counter accept
+  - rule: ip saddr 46.209.112.242/32 tcp dport 443 counter log accept
     comment: Rahsazi Mobin
 
-  - rule: ip saddr 94.182.209.116/32 tcp dport 443 counter accept
+  - rule: ip saddr 94.182.209.116/32 tcp dport 443 counter log accept
     comment: Rahsazi Mobin
 
-  - rule: ip saddr 178.252.143.18/32 tcp dport 443 counter accept
+  - rule: ip saddr 178.252.143.18/32 tcp dport 443 counter log accept
     comment: Dast Avard Dey
+
+  - rule: ip saddr 31.214.170.114/32 tcp dport 443 counter log accept
+    comment: Zarin Royal Third User
 
   - rule: log level info drop
     comment: Log and drop all other traffic
