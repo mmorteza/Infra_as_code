@@ -90,3 +90,15 @@ ftp_users:
     passwd: '$6$nOhIE6LABHFPePBG$/LfA7w2V8MY.IrN6Z51dgKzsvTBukDV2O19m7BHmSBR8/Sl5P7GfxMlx1o2wY4k/JgGOhTPH/6LNMWmzrfGU9.'
     pass_max_days: 99999
     pass_warn_days: 7
+
+  - name: darya-sadra
+    shell: /sbin/nologin
+    uid: 2007
+    groups:
+      - ftpusers
+    comment: "Daya sadra Zagros"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$NaI4g9eQGCcN9AIv$Wh8orThCNl6iO8VQF2m4QM/2WcVsb.DRU5pM.mEo9rZnYLhvZxHeWwSxw6CTvxYICiwO6xUpVSGw1sgTzxH9n1'
+    pass_max_days: 365
+    pass_warn_days: 14
+  
