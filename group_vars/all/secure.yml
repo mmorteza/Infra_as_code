@@ -43,8 +43,8 @@ common_users:
 
 ssh_users:
   - name: mosadeghi
-    key: 
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnsG0JUNHqqEzGbxTG/nYooEXVEnDOfBB2fYzbWeHSp sadeghi@tebyanidc.ir" 
+    key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnsG0JUNHqqEzGbxTG/nYooEXVEnDOfBB2fYzbWeHSp sadeghi@tebyanidc.ir"
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK7ieuhmDyRM3CmqHhIag38aZooiJ5yxb2MKj0KqzdzW morteza.sadeghi@outlook.com"
 
 ftp_users:
@@ -92,7 +92,7 @@ ftp_users:
     pass_warn_days: 7
 
   - name: darya-sadra
-    shell: /sbin/nologin
+    shell: /bin/ftponly
     uid: 2007
     groups:
       - ftpusers
@@ -101,4 +101,4 @@ ftp_users:
     passwd: '$6$NaI4g9eQGCcN9AIv$Wh8orThCNl6iO8VQF2m4QM/2WcVsb.DRU5pM.mEo9rZnYLhvZxHeWwSxw6CTvxYICiwO6xUpVSGw1sgTzxH9n1'
     pass_max_days: 365
     pass_warn_days: 14
-  
+
