@@ -88,7 +88,7 @@ input_rules:
   - rule: ip saddr 31.214.170.114/32 tcp dport 443 counter log accept
     comment: Zarin Royal Third User
 
-  - rule: ip saddr 5.160.63.42/32 tcp dport 443 counter log accept
+  - rule: ip saddr 91.92.180.154/32 tcp dport 443 counter log accept
     comment: Kavan Arad dana borna
 
   - rule: log level info drop
