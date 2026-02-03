@@ -7,6 +7,9 @@ input_rules:
   - rule: ip saddr 212.227.128.217/32 counter log accept
     comment: DE server
 
+  - rule: ip saddr 194.164.24.186/32 counter log accept
+    comment: London server
+
   - rule: iif "lo" accept
     comment: "Allow traffic to the loopback interface"
 
@@ -22,14 +25,12 @@ input_rules:
   - rule: udp dport {32100-32800} counter accept
     comment: allow wiregaurd ports
 
+
   # - rule: iif "tap_soft" counter accept
   #   comment: "Accept any on tunnel 0 interface"
 
   # - rule: iif "lotus-ipip" counter accept
   #   comment: allow lotusco srcnat vpn client on tunnel
-
-  - rule: ip saddr 81.12.121.42/32 ip protocol ipip counter accept
-    comment: allow ipip tunnel from lotusco office
 
   - rule: ip saddr 87.107.103.242/29 tcp dport 8088 counter accept
     comment: Kavan Office
@@ -48,7 +49,7 @@ input_rules:
 
   - rule: udp dport { 1723, 3271 } counter accept
     comment: Allow vpn access
- 
+
   - rule: ip protocol esp counter accept
     comment: accept ESP
 
@@ -61,38 +62,23 @@ input_rules:
   - rule: ip saddr 77.68.66.19/32 tcp dport 443 counter accept
     comment: UK Proxy server
 
+  - rule: ip saddr 81.12.121.42/32 ip protocol ipip counter accept
+    comment: allow ipip tunnel from lotusco office
+
   - rule: ip saddr 81.12.121.42/32 tcp dport { 22,443,8443,5555,8088,8080 } counter accept
     comment: Lotusco Office
 
-  - rule: ip saddr 51.79.60.201/32 tcp dport 5555 counter log accept
-    comment: Morteza Sadeghi
-
-  - rule: ip saddr 192.111.144.71/32 tcp dport 22 counter accept
-    comment: Farshid VPN
-
-  - rule: ip saddr 192.111.144.71/32 tcp dport 5555 counter accept
-    comment: Farshid VPN
-
-  - rule: ip saddr 185.78.23.43/32 tcp dport 443 counter log accept
+  - rule: ip saddr 185.78.23.43/32 tcp dport {443,22,8443,8888,8080,992} counter log accept
     comment: Morteza Sadeghi
   
-  - rule: ip saddr 185.78.23.43/32 tcp dport 5555 counter log accept
-    comment: Morteza Sadeghi
+  - rule: ip saddr 5.160.213.157/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi-CII
+  
+  - rule: ip saddr 5.160.213.158/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi-CII
 
-  - rule: ip saddr 51.79.60.201/32 tcp dport 8088 counter log accept
-    comment: Morteza Sadeghi
-
-  - rule: ip saddr 185.78.23.43/32 tcp dport 8443 counter log accept
-    comment: Morteza Sadeghi
-
-  - rule: ip saddr 185.78.23.43/32 tcp dport 22 counter log accept
-    comment: Morteza Sadeghi
-
-  - rule: ip saddr 194.164.175.18/32 tcp dport 22 counter log accept
-    comment: Morteza Sadeghi Spain
-
-  - rule: ip saddr 194.164.175.18/32 tcp dport 443 counter accept
-    comment: Morteza Spain
+  - rule: ip saddr 185.103.85.156/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi-CII
 
   - rule: counter drop
     comment: "count dropped packets"
@@ -106,6 +92,7 @@ output_rules:
   # Allow established and related connections
   - ct state established,related counter accept
   - ip daddr 212.227.128.217/32 counter log accept
+  - ip daddr 194.164.24.186/32 counter log accept
 
   # Allow traffic to the localhost IP address
   - oif "lo" counter accept
