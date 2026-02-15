@@ -111,3 +111,14 @@ ftp_users:
     passwd: '$6$kRdJp5emZd/ugyTA$CgpLegLp3V7ybudcCnfLq.wkWSX2MzwzH5fhrwAF6JzQHQWjfM1qsVr0cDcJ5jzdsp6Q8isr.Dg/ByfZvUUv11'
     pass_max_days: 365
     pass_warn_days: 14
+
+  - name: bargh-hormozgan
+    shell: /bin/ftponly
+    uid: 2009
+    groups:
+      - ftpusers
+    comment: "Dam pezeshki Golestan"
+    home: "/home/fortigate/7.0"
+    passwd: '$6$MSLzrIif1y2w1OBd$obzrBQQL7P80WKS/cAHg7gv50a.zAgtR9OOLc2K1F150IdBH1atgx.zhVf79iee8CV2NisyvyLaOznmHh.WjK.'
+    pass_max_days: 365
+    pass_warn_days: 14

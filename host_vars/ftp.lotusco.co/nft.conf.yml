@@ -21,6 +21,14 @@ input_rules:
     comment: Miras Farhangi
   - rule: ip saddr  89.37.10.130/32 tcp dport @ftp_port counter accept
     comment: Miras Farhangi
+  - rule: ip saddr  185.129.214.62/32 tcp dport @ftp_port counter accept
+    comment: bargh hormozgan
+  - rule: ip saddr  185.129.214.62/32 tcp dport @ftp_pasv_ports counter accept
+    comment: bargh hormozgan
+  - rule: ip saddr  91.243.169.77/32 tcp dport @ftp_pasv_ports counter accept
+    comment: bargh hormozgan
+  - rule: ip saddr  91.243.169.77/32 tcp dport @ftp_port counter accept
+    comment: bargh hormozgan
   - rule: log level info drop
     comment: Log and drop all other traffic
 
