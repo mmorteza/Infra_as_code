@@ -91,6 +91,24 @@ input_rules:
   - rule: ip saddr 91.92.180.154/32 tcp dport 443 counter log accept
     comment: Kavan Arad dana borna
 
+  - rule: ip saddr 185.222.182.8/32 tcp dport 443 counter log accept
+    comment: Bank Iran Zamin FG-400F
+  
+  - rule: ip saddr 185.222.183.51/32 tcp dport 443 counter log accept
+    comment: Bank Iran Zamin FG-400F
+  
+  - rule: ip saddr 94.101.139.194/32 tcp dport 443 counter log accept
+    comment: Bank Iran Zamin FG-400F
+  
+  - rule: ip saddr 185.222.183.211/32 tcp dport 443 counter log accept
+    comment: Bank Iran Zamin FG-400F
+  
+  - rule: ip saddr 185.95.154.130/32 tcp dport 443 counter log accept
+    comment: Apadana Asalouye
+
+  - rule: ip saddr 5.160.82.162/32 tcp dport 443 counter log accept
+    comment: Apadana Tehran
+
   - rule: log level info drop
     comment: Log and drop all other traffic
 
