@@ -80,6 +80,12 @@ input_rules:
   - rule: ip saddr 185.103.85.156/32 tcp dport 443 counter log accept
     comment: Morteza Sadeghi-CII
 
+  - rule: ip saddr 185.103.85.157/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi-CII
+
+  - rule: ip saddr 185.103.85.158/32 tcp dport 443 counter log accept
+    comment: Morteza Sadeghi-CII
+
   - rule: counter drop
     comment: "count dropped packets"
 
