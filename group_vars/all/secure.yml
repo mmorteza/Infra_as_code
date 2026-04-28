@@ -122,3 +122,14 @@ ftp_users:
     passwd: '$6$MSLzrIif1y2w1OBd$obzrBQQL7P80WKS/cAHg7gv50a.zAgtR9OOLc2K1F150IdBH1atgx.zhVf79iee8CV2NisyvyLaOznmHh.WjK.'
     pass_max_days: 365
     pass_warn_days: 14
+
+  - name: ariya-mana
+    shell: /bin/ftponly
+    uid: 2010
+    groups:
+      - ftpusers
+    comment: "Arya Pardaz Mana"
+    home: "/home/fortigate/7.2"
+    passwd: '$6$lZrGRtUMrpV780Lv$JSPf4boltk0EYbAC3qb4HKO1f6F5tMtKwM5xaIQk92FVTsDW/IasHk5OKwPIv7LbAXbFqmYUKCdW99rr4GnPN1'
+    pass_max_days: 365
+    pass_warn_days: 14

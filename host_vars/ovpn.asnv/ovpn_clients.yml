@@ -1,9 +1,10 @@
 clients_bind_ip:
-  - name: m.sadeghi
-    ipv4: 10.8.0.10
+  - name: msadeghi
+    ipv4: 172.16.3.3 255.255.255.0
     ipv6: fd00:1234:5678:9000::10
-  - name: sh.ghoreyshi
-    ipv4: 10.8.0.11
+  - name: ghoreyshi
+    ipv4: 172.16.3.10 255.255.255.0
+  - name: 
 
 vpn_users:
   - username: alice

@@ -109,6 +109,12 @@ input_rules:
   - rule: ip saddr 5.160.82.162/32 tcp dport 443 counter log accept
     comment: Apadana Tehran
 
+  - rule: ip saddr 194.164.24.186/32 tcp dport 22 counter accept
+    comment: Morteza Sadeghi VPN UK
+  
+  - rule: ip saddr 146.19.130.102/32 tcp dport 22 counter accept
+    comment: Lotusco UK Windows Host
+
   - rule: log level info drop
     comment: Log and drop all other traffic
 
