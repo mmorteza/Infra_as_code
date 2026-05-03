@@ -114,6 +114,9 @@ input_rules:
   
   - rule: ip saddr 146.19.130.102/32 tcp dport 22 counter accept
     comment: Lotusco UK Windows Host
+  
+  - rule: ip saddr 100.125.204.183/32 tcp dport 443 counter accept
+    comment: Ideh Gostar
 
   - rule: log level info drop
     comment: Log and drop all other traffic
