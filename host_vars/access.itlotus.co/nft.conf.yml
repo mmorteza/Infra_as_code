@@ -109,7 +109,7 @@ input_rules:
   - rule: ip saddr 146.19.130.102/32 tcp dport 22 counter accept
     comment: Lotusco UK Windows Host
   
-  - rule: ip saddr 100.125.204.183/32 tcp dport 7213 counter accept
+  - rule: ip saddr 93.118.97.118/32 tcp dport 7213 counter accept
     comment: Ideh Gostar
 
   - rule: ip saddr 217.219.37.30/32 tcp dport 7213 counter accept
