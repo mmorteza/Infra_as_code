@@ -109,11 +109,14 @@ input_rules:
   - rule: ip saddr 146.19.130.102/32 tcp dport 22 counter accept
     comment: Lotusco UK Windows Host
   
-  - rule: ip saddr 93.118.97.118/32 tcp dport 7213 counter accept
+  - rule: ip saddr  216.147.121.187/32 tcp dport 7213 counter accept
     comment: Ideh Gostar
 
   - rule: ip saddr 217.219.37.30/32 tcp dport 7213 counter accept
     comment: Nofoz Napaziran
+
+  - rule: ip saddr 212.33.200.6/32 tcp dport 7213 counter accept
+    comment: Zarin Polimer
 
   - rule: log level info drop
     comment: Log and drop all other traffic
