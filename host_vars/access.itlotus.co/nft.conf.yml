@@ -112,6 +112,9 @@ input_rules:
   - rule: ip saddr  216.147.121.187/32 tcp dport 7213 counter accept
     comment: Ideh Gostar
 
+  - rule: ip saddr  46.102.129.2/32 tcp dport 7213 counter accept
+    comment: Ideh Gostar
+
   - rule: ip saddr 217.219.37.30/32 tcp dport 7213 counter accept
     comment: Nofoz Napaziran
 
