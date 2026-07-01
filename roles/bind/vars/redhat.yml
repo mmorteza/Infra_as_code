@@ -1,0 +1,9 @@
+---
+bind_package: bind
+bind_service: named
+bind_conf_dir: /etc
+bind_zone_dir: /var/named/zones
+bind_named_conf_options: /etc/named.conf.options
+bind_named_conf_local: /etc/named.conf.local
+bind_named_user: named
+bind_named_group: named

@@ -1,0 +1,26 @@
+---
+- name: Template forward zone files (master)
+  ansible.builtin.template:
+    src: zone.db.j2
+    dest: "{{ bind_zone_dir }}/db.{{ item.name }}"
+    owner: "{{ bind_named_user }}"
+    group: "{{ bind_named_group }}"
+    mode: "0640"
+    validate: "named-checkzone {{ item.name }} %s"
+  loop: "{{ bind_zones }}"
+  loop_control:
+    label: "{{ item.name }}"
+  notify: reload bind
+
+- name: Template reverse zone files (master)
+  ansible.builtin.template:
+    src: zone.rev.j2
+    dest: "{{ bind_zone_dir }}/db.{{ item.name }}"
+    owner: "{{ bind_named_user }}"
+    group: "{{ bind_named_group }}"
+    mode: "0640"
+    validate: "named-checkzone {{ item.name }} %s"
+  loop: "{{ bind_reverse_zones }}"
+  loop_control:
+    label: "{{ item.name }}"
+  notify: reload bind

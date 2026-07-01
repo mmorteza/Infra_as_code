@@ -1,0 +1,9 @@
+---
+# Overridable defaults. OS-specific package/service/path names live in
+# vars/debian.yml and vars/redhat.yml and take precedence over these.
+
+bind_listen_ipv4: "any"
+bind_listen_ipv6: "none"
+
+# Directory where zone files live on disk (overridden per-OS in vars/*.yml)
+bind_zone_dir: "/etc/bind/zones"

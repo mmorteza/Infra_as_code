@@ -1,0 +1,67 @@
+---
+- name: Load OS-specific variables
+  ansible.builtin.include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- name: Install and enable BIND
+  ansible.builtin.include_tasks: install.yml
+
+- name: Deploy shared config (options + TSIG key)
+  ansible.builtin.include_tasks: tsigkey.yml
+
+- name: Template named.conf.options
+  ansible.builtin.template:
+    src: named.conf.options.j2
+    dest: "{{ bind_named_conf_options }}"
+    owner: root
+    group: "{{ bind_named_group }}"
+    mode: "0640"
+    validate: "named-checkconf %s"
+  notify: reload bind
+
+- name: Make sure zone directory exists
+  ansible.builtin.file:
+    path: "{{ bind_zone_dir }}"
+    state: directory
+    owner: "{{ bind_named_user }}"
+    group: "{{ bind_named_group }}"
+    mode: "0750"
+
+- name: Configure this node as a zone master
+  ansible.builtin.include_tasks: master.yml
+  when: inventory_hostname in groups['bind_masters']
+
+- name: Configure this node as a zone slave
+  ansible.builtin.include_tasks: slave.yml
+  when: inventory_hostname in groups['bind_slaves']
+
+- name: Template named.conf.local (master or slave zone stanzas, per-host)
+  ansible.builtin.template:
+    src: named.conf.local.j2
+    dest: "{{ bind_named_conf_local }}"
+    owner: root
+    group: "{{ bind_named_group }}"
+    mode: "0640"
+    validate: "named-checkconf %s"
+  notify: reload bind
+
+- name: Ensure main named.conf includes options + local (RedHat family)
+  ansible.builtin.lineinfile:
+    path: /etc/named.conf
+    regexp: '^include "{{ item }}";'
+    line: 'include "{{ item }}";'
+    insertafter: EOF
+  loop:
+    - "{{ bind_named_conf_options }}"
+    - "{{ bind_named_conf_local }}"
+  when: ansible_os_family == "RedHat"
+  notify: reload bind
+
+- name: Verify named.conf syntax is valid
+  ansible.builtin.command: "named-checkconf"
+  changed_when: false
+
+- name: Make sure BIND is running and enabled
+  ansible.builtin.service:
+    name: "{{ bind_service }}"
+    state: started
+    enabled: true

@@ -1,0 +1,19 @@
+---
+- name: Install BIND package (Debian/Ubuntu)
+  ansible.builtin.apt:
+    name: "{{ bind_package }}"
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- name: Install BIND package (RHEL family)
+  ansible.builtin.dnf:
+    name: "{{ bind_package }}"
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Install bind-utils (dig/named-checkconf helpers, RHEL family)
+  ansible.builtin.dnf:
+    name: bind-utils
+    state: present
+  when: ansible_os_family == "RedHat"

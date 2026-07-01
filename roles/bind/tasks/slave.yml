@@ -1,0 +1,12 @@
+---
+# Slave doesn't need zone files templated - BIND populates them itself via
+# AXFR/IXFR from the master. We just need the directory to be writable by
+# the named/bind service account so it can drop the transferred zone data.
+
+- name: Ensure zone directory is writable by the BIND service account
+  ansible.builtin.file:
+    path: "{{ bind_zone_dir }}"
+    state: directory
+    owner: "{{ bind_named_user }}"
+    group: "{{ bind_named_group }}"
+    mode: "0750"

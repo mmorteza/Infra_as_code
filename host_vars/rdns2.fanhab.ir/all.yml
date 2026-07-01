@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------
+# Global BIND settings shared by master + slave
+# ---------------------------------------------------------------------------
+
+# TSIG key used to authenticate zone transfers between master and slave.
+# Generate a real one with:  tsig-keygen -a hmac-sha256 sync-key
+# Then ansible-vault encrypt this file before committing.
+bind_tsig_key_name: "sync-key"
+bind_tsig_algorithm: "hmac-sha256"
+bind_tsig_secret: "CHANGE_ME_REPLACE_WITH_TSIG_KEYGEN_OUTPUT=="
+
+# Networks allowed to query these servers (recursion clients / ACL).
+# Restrict this to your real internal ranges.
+bind_allow_query:
+  - "192.168.1.0/24"
+  - "127.0.0.1"
+
+# Forwarders used for anything outside the zones this pair is authoritative for.
+bind_forwarders:
+  - "1.1.1.1"
+  - "9.9.9.9"
+
+# Whether this pair also answers recursive queries for bind_allow_query
+# clients (true) or is authoritative-only (false).
+bind_recursion: true

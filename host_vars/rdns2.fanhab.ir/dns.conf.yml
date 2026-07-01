@@ -1,0 +1,31 @@
+bind_zones:
+  - name: example.com
+    serial: 2026070101
+    ttl: 86400
+    soa_ns: ns1.example.com.
+    soa_email: admin.example.com.        # dot instead of @
+    ns_records:
+      - ns1.example.com.
+      - ns2.example.com.
+    a_records:
+      - { name: "ns1",  ip: "192.168.1.10" }
+      - { name: "ns2",  ip: "192.168.1.11" }
+      - { name: "www",  ip: "192.168.1.20" }
+      - { name: "mail", ip: "192.168.1.21" }
+    cname_records:
+      - { name: "mx", target: "mail.example.com." }
+
+bind_reverse_zones:
+  - name: 1.168.192.in-addr.arpa
+    serial: 2026070101
+    ttl: 86400
+    soa_ns: ns1.example.com.
+    soa_email: admin.example.com.
+    ns_records:
+      - ns1.example.com.
+      - ns2.example.com.
+    ptr_records:
+      - { host: "10", name: "ns1.example.com." }
+      - { host: "11", name: "ns2.example.com." }
+      - { host: "20", name: "www.example.com." }
+      - { host: "21", name: "mail.example.com." }

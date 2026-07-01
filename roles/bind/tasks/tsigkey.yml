@@ -1,0 +1,9 @@
+---
+- name: Template TSIG key file
+  ansible.builtin.template:
+    src: tsig.key.j2
+    dest: "{{ bind_conf_dir }}/tsig.key"
+    owner: root
+    group: "{{ bind_named_group }}"
+    mode: "0640"
+  notify: reload bind

@@ -1,0 +1,55 @@
+// Managed by Ansible - do not edit by hand. Changes will be overwritten.
+{% if not bind_recursion %}
+// This server is AUTHORITATIVE-ONLY: it answers for the zones it hosts
+// and refuses to act as a recursive resolver / open cache for anything
+// else. This is the recommended mode for a forward/reverse-lookup pair.
+{% endif %}
+
+{% if bind_recursion %}
+acl "trusted" {
+{% for net in bind_allow_recursion %}
+    {{ net }};
+{% endfor %}
+};
+{% endif %}
+
+options {
+    directory "/var/cache/bind";
+
+    listen-on { {{ bind_listen_ipv4 }}; };
+    listen-on-v6 { {{ bind_listen_ipv6 }}; };
+
+    // Who can ask for data in zones we're authoritative for.
+    allow-query { {{ bind_allow_query }}; };
+
+{% if bind_recursion %}
+    recursion yes;
+    allow-recursion { trusted; };
+    allow-query-cache { trusted; };
+{% else %}
+    // Hard-disabled: do not serve as a recursive/caching resolver.
+    recursion no;
+    allow-recursion { none; };
+    allow-query-cache { none; };
+{% endif %}
+
+    // Zone transfers are denied globally; each zone stanza in
+    // named.conf.local opens transfer to the slave via TSIG key instead.
+    allow-transfer { none; };
+
+{% if bind_recursion and bind_forwarders is defined and bind_forwarders | length > 0 %}
+    forwarders {
+{% for fwd in bind_forwarders %}
+        {{ fwd }};
+{% endfor %}
+    };
+    forward only;
+{% endif %}
+
+    dnssec-validation auto;
+
+    // Don't reveal the BIND version to the world
+    version "not disclosed";
+};
+
+include "{{ bind_conf_dir }}/tsig.key";

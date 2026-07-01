@@ -1,0 +1,66 @@
+// Managed by Ansible - do not edit by hand. Changes will be overwritten.
+//
+// This file is rendered differently depending on which inventory group
+// {{ inventory_hostname }} belongs to:
+//   - bind_masters -> "type master" stanzas, allow-transfer + notify to slaves
+//   - bind_slaves  -> "type slave" stanzas, pulling from the master over TSIG
+{% set master_host = groups['bind_masters'][0] %}
+{% set master_ip = hostvars[master_host]['ansible_host'] | default(master_host) %}
+{% set slave_ips = [] %}
+{% for h in groups['bind_slaves'] %}
+{{ slave_ips.append(hostvars[h]['ansible_host'] | default(h)) or "" }}
+{%- endfor %}
+
+{% if inventory_hostname in groups['bind_masters'] %}
+// ---------------------------------------------------------------------
+// MASTER stanzas
+// ---------------------------------------------------------------------
+{% for zone in bind_zones %}
+zone "{{ zone.name }}" {
+    type master;
+    file "{{ bind_zone_dir }}/db.{{ zone.name }}";
+    // key-based ACL - any slave presenting this TSIG key may transfer
+    allow-transfer { key "{{ bind_tsig_key_name }}"; };
+    also-notify {
+{% for ip in slave_ips %}
+        {{ ip }};
+{% endfor %}
+    };
+    notify yes;
+};
+{% endfor %}
+
+{% for zone in bind_reverse_zones %}
+zone "{{ zone.name }}" {
+    type master;
+    file "{{ bind_zone_dir }}/db.{{ zone.name }}";
+    allow-transfer { key "{{ bind_tsig_key_name }}"; };
+    also-notify {
+{% for ip in slave_ips %}
+        {{ ip }};
+{% endfor %}
+    };
+    notify yes;
+};
+{% endfor %}
+
+{% else %}
+// ---------------------------------------------------------------------
+// SLAVE stanzas
+// ---------------------------------------------------------------------
+{% for zone in bind_zones %}
+zone "{{ zone.name }}" {
+    type slave;
+    masters { {{ master_ip }} key "{{ bind_tsig_key_name }}"; };
+    file "{{ bind_zone_dir }}/db.{{ zone.name }}";
+};
+{% endfor %}
+
+{% for zone in bind_reverse_zones %}
+zone "{{ zone.name }}" {
+    type slave;
+    masters { {{ master_ip }} key "{{ bind_tsig_key_name }}"; };
+    file "{{ bind_zone_dir }}/db.{{ zone.name }}";
+};
+{% endfor %}
+{% endif %}

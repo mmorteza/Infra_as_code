@@ -1,0 +1,26 @@
+; Managed by Ansible - do not edit by hand. Changes will be overwritten.
+; Zone: {{ item.name }}
+$TTL {{ item.ttl }}
+@   IN  SOA {{ item.soa_ns }} {{ item.soa_email }} (
+        {{ item.serial }}  ; Serial - bump this on every change
+        3600               ; Refresh (1h)
+        1800               ; Retry (30m)
+        604800             ; Expire (1w)
+        86400 )            ; Negative cache TTL (1d)
+
+; Name servers
+{% for ns in item.ns_records %}
+@   IN  NS  {{ ns }}
+{% endfor %}
+
+; A records
+{% for rec in item.a_records %}
+{{ rec.name }}    IN  A   {{ rec.ip }}
+{% endfor %}
+{% if item.cname_records is defined %}
+
+; CNAME records
+{% for rec in item.cname_records %}
+{{ rec.name }}    IN  CNAME   {{ rec.target }}
+{% endfor %}
+{% endif %}
