@@ -1,19 +1,29 @@
 ---
+- name: gather  packages facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Install BIND package (Debian/Ubuntu)
   ansible.builtin.apt:
     name: "{{ bind_package }}"
     state: present
     update_cache: true
-  when: ansible_os_family == "Debian"
+  when: 
+    - ansible_os_family == "Debian"
+    - bind_package not in ansible_facts.packages
 
 - name: Install BIND package (RHEL family)
   ansible.builtin.dnf:
     name: "{{ bind_package }}"
     state: present
-  when: ansible_os_family == "RedHat"
+  when:
+    - ansible_os_family == "RedHat"
+     '"{{ bind_package }}"" not in ansible_facts.packages'
 
 - name: Install bind-utils (dig/named-checkconf helpers, RHEL family)
   ansible.builtin.dnf:
     name: bind-utils
     state: present
-  when: ansible_os_family == "RedHat"
+  when:
+    - ansible_os_family == "RedHat"
+    - '"bind-utils" no in ansible_fats.packages'

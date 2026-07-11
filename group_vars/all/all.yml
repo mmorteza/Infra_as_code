@@ -54,5 +54,3 @@ ovpn_require_packages:
   - easy-rsa
   - libpam-google-authenticator
   - qrencode
-
-
