@@ -1,14 +1,13 @@
 ---
 - name: Load OS-specific variables
   ansible.builtin.include_vars: "{{ ansible_os_family | lower }}.yml"
+- name: Include tasks to configure bind on both RHEL and Debian
+  include_tasks: "{{ item }}"
+  loop:
+    - install.yml
+    - tsigkey.yml
 
-- name: Install and enable BIND
-  ansible.builtin.include_tasks: install.yml
-
-- name: Deploy shared config (options + TSIG key)
-  ansible.builtin.include_tasks: tsigkey.yml
-
-- name: Template named.conf.options
+- name: Template named.conf.options 
   ansible.builtin.template:
     src: named.conf.options.j2
     dest: "{{ bind_named_conf_options }}"

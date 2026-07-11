@@ -21,4 +21,6 @@
       tags: ['ftp']
     - role: openvpn
       tags: ['ovpn']
+    - role: bind
+      tags: ['dns']
 
