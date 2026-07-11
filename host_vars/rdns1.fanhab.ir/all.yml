@@ -22,4 +22,6 @@ bind_forwarders:
 
 # Whether this pair also answers recursive queries for bind_allow_query
 # clients (true) or is authoritative-only (false).
-bind_recursion: true
+bind_recursion: false
+bind_allow_recursion: 
+  - 127.0.0.1
