@@ -1,0 +1,326 @@
+bind_zones:
+  - name: fanhab.local
+    serial: 2026070101
+    ttl: 86400
+    soa_ns: ns1.example.com.
+    soa_email: admin.example.com.        # dot instead of @
+    ns_records:
+      - ns1.example.com.
+      - ns2.example.com.
+    a_records:
+      - { name: "ns1",  ip: "192.168.1.10" }
+    cname_records:
+      - { name: "mx", target: "mail.example.com." }
+
+bind_reverse_zones:
+  - name: 200.255.134.in-addr.arpa
+    serial: 20260711200
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "22", name: "linux-plesk.palizct.com." }
+      - { host: "35", name: "alt1-mx.eypars.net." }
+      - { host: "36", name: "mailgateway.eypars.net ." }
+      - { host: "53", name: "edge-2019.inovintech.ir." }
+      - { host: "145", name: "kianpo02mta.datamizban.net." }
+      - { host: "146", name: "kianpo01mta.datamizban.net." }
+      - { host: "149", name: "kianpo03mta.datamizban.net." }
+      - { host: "150", name: "res01mta.datamizban.net." }
+      - { host: "194", name: "mail.palizct.com." }
+      - { host: "210", name: "mail.pendarnetwork.com." }
+  
+  - name: 201.255.134.in-addr.arpa
+    serial: 20260711201
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "29", name: "ns100.persiantools.net." }
+      - { host: "37", name: "mail.ramanlab.ir." }
+      - { host: "50", name: "kianpo01mta.datamizban.net." }
+      - { host: "52", name: "irpars01mta.datamizban.net." }
+      - { host: "53", name: "irpars01icm.datamizban.net." }
+      - { host: "54", name: "irpars02mta.datamizban.net." }
+      - { host: "92", name: "pars.raahbar.net." }
+      - { host: "94", name: "mail.raahbar.net." }
+      - { host: "114", name: "mail.messagingsystem.net." }
+      - { host: "117", name: "mail.runcorp.net." }
+      - { host: "124", name: "mail.extraxhange.org." }
+      - { host: "125", name: "mail.extrustexchange.info." }
+      - { host: "130", name: "ir.persiantools.net." }
+      - { host: "165", name: "mail.saravapars.com." }
+      - { host: "212", name: "mail.ebidar.net." }
+  
+  - name: 202.255.134.in-addr.arpa
+    serial: 20260711202
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "3", name: "mail.mafpars.com." }
+      - { host: "10", name: "mail4.mafpars.com." }
+
+  - name: 203.255.134.in-addr.arpa
+    serial: 20260711203
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "13", name: "mail.zarsim.ir." }
+      - { host: "71", name: "mx1.netrano.com." }
+      - { host: "72", name: "mx2.netrano.com." }
+      - { host: "82", name: "mail.ferfere.com." }
+
+  - name: 204.255.134.in-addr.arpa
+    serial: 20260711204
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+
+  
+  - name: 205.255.134.in-addr.arpa
+    serial: 20260711205
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+
+  - name: 206.255.134.in-addr.arpa
+    serial: 20260711206
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "205", name: "ns5.fanhab.ir" }
+      - { host: "206", name: "ns6.fanhab.ir" }
+
+  - name: 207.255.134.in-addr.arpa
+    serial: 20260711207
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+
+  - name: 168.214.31.in-addr.arpa
+    serial: 20260711168
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "6", name: "mail.openhostir.com." }
+      - { host: "8", name: "relay.fanhab.ir." }
+      - { host: "26", name: "cloud.rtmg.ir." }
+      - { host: "27", name: "mail.rtmg.ir." }
+      - { host: "90", name: "testapis.gs1-ir.org." }
+      - { host: "90", name: "testadminapi.gs1-ir.org." }
+      - { host: "90", name: "testamemapi.gs1-ir.org." }
+      - { host: "90", name: "testagentapi.gs1-ir.org." }
+      - { host: "90", name: "testadmin.gs1-ir.org." }
+      - { host: "90", name: "testamem.gs1-ir.org." }
+      - { host: "90", name: "testagent.gs1-ir.org." }
+      - { host: "90", name: "testpay.gs1-ir.org." }
+      - { host: "90", name: "testepay.gs1-ir.org." }
+      - { host: "90", name: "server.maknanet.com." }
+      - { host: "90", name: "testinquiry.gs1-ir.org." }
+      - { host: "131", name: "mail.yaraholding.com." }
+      - { host: "164", name: "gilnamoshaver.com." }
+      - { host: "164", name: "gilnamedia.ir." }
+      - { host: "166", name: "C.bebye.ir." }
+      - { host: "171", name: "internal.sinainsurance.com." }
+      - { host: "177", name: "mail.rasht.ir." }
+      - { host: "215", name: "hod.ir." }
+
+  - name: 169.214.31.in-addr.arpa
+    serial: 20260711169
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "8", name: "mail.mcth.ir." }
+      - { host: "31", name: "ns2.palizct.com." }
+      - { host: "31", name: "linux.palizct.com." }
+      - { host: "31", name: "ns1.palizct.com." }
+      - { host: "34", name: "linux.palizct.com." }
+      - { host: "44", name: "mail.rsarvin.com." }
+      - { host: "52", name: "mail.ipicb.ir." }
+      - { host: "114", name: "secure-mx.toucamail.com." }
+      - { host: "117", name: "mx1.toucamail.com." }
+      - { host: "118", name: "mx02.gian.appeyk.com." }
+      - { host: "122", name: "mail.irantire.ir." }
+      - { host: "180", name: "SMTP.PARSIANINSURANCE.COM." }
+      - { host: "181", name: "SMTP.PARSIANINSURANCE.COM." }
+      - { host: "226", name: "irpdc03.resanehpooneh.com." }
+      - { host: "227", name: "irpdc02.resanehpooneh.com." }
+      - { host: "228", name: "irpdc07.resanehpooneh.com." }
+      - { host: "229", name: "irpdc01.resanehpooneh.com." }
+      - { host: "230", name: "irpdc12.resanehpooneh.com." }
+
+  - name: 170.214.31.in-addr.arpa
+    serial: 20260711170
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "91", name: "linux-plesk.palizct.com." }
+      - { host: "115", name: "mailmx2.zarringc.com." }
+      - { host: "145", name: "mail.sojitz.ir." }
+      - { host: "204", name: "ferfere.com." }
+      - { host: "254", name: "meetbsd.ir." }
+
+  - name: 171.214.31.in-addr.arpa
+    serial: 20260711171
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "69", name: "mail.ttbank.ir." }
+      - { host: "170", name: "venus.pws-dns.net." }
+      - { host: "171", name: "ns93.pws-dns.net." }
+      - { host: "231", name: "mail.runca.ir." }
+      - { host: "231", name: "mail.paymon.money." }
+      - { host: "231", name: "mail.dinarz.ir." }
+      - { host: "231", name: "mail.cimsnetwork.com." }
+      - { host: "231", name: "mail.moneyro.app." }
+      - { host: "231", name: "mail.runclearing.com." }
+      - { host: "231", name: "mail.mrwallet.ir." }
+      - { host: "231", name: "mail.runc.info." }
+      - { host: "234", name: "mail.runcorp.net." }
+      - { host: "252", name: "mail.ipicb.ir." }
+
+  - name: 172.214.31.in-addr.arpa
+    serial: 20260711172
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "3", name: "webmail.alibaba.ir." }
+      - { host: "78", name: "mail.sealandws.com." }
+      - { host: "206", name: "smtp.soitco.com." }
+      - { host: "207", name: "smtp.soitco.com." }
+      - { host: "219", name: "smtp.soitco.com." }
+      - { host: "221", name: "smtp.soitco.com." }
+
+  - name: 173.214.31.in-addr.arpa
+    serial: 20260711173
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "26", name: "irpdc06.resanehpooneh.com." }
+      - { host: "27", name: "irpdc05.resanehpooneh.com." }
+      - { host: "29", name: "irpdc08.resanehpooneh.com." }
+      - { host: "30", name: "irpdc09.resanehpooneh.com." }
+      - { host: "82", name: "mail.bonyadmaskan.ir." }
+      - { host: "146", name: "komolos.openhostir.com." }
+      - { host: "178", name: "mail.rahyar.sch.ir." }
+      - { host: "178", name: "rahyar.sch.ir." }
+      - { host: "214", name: "141.gln.barcodeyar.com." }
+      - { host: "214", name: "register.gs1-ir.org." }
+      - { host: "221", name: "Pavancloud.com." }
+
+  - name: 174.214.31.in-addr.arpa
+    serial: 20260711174
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "35", name: "mail.axamil.com." }
+      - { host: "99", name: "parspo01lcp.parsianhost.net." }
+      - { host: "112", name: "parspo01mta.parsianhost.net." }
+      - { host: "114", name: "parspo03wsp.parsianhost.net." }
+      - { host: "131", name: "server.jna-nissan.com." }
+      - { host: "142", name: "server.shomaregan.com." }
+      - { host: "162", name: "mail.satian.ir." }
+      - { host: "162", name: "mail.rojagroup.com." }
+      - { host: "194", name: "omid.pws-dns.net." }
+      - { host: "195", name: "ns97.pws-dns.net." }
+      - { host: "196", name: "uranus.pws-dns.net." }
+      - { host: "197", name: "ns81.pws-dns.net." }
+      - { host: "198", name: "ns87.pws-dns.net." }
+      - { host: "203", name: "front-01.grid.gian.appeyk.com." }
+      - { host: "204", name: "mail.apeyk.com." }
+      - { host: "204", name: "mail.apeyk.ir." }
+      - { host: "204", name: "mail.appeyk.com." }
+      - { host: "204", name: "mail.arissystem.ir." }
+      - { host: "206", name: "bkmx2.toucamail.com." }
+      - { host: "210", name: "s02.neorfava.com." }
+      - { host: "225", name: "email.barook.ir." }
+      - { host: "233", name: "www.shakeylead.com." }
+      - { host: "236", name: "alt1-mx.shakeylead.com." }
+
+
+  - name: 175.214.31.in-addr.arpa
+    serial: 20260711175
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
+      - { host: "2", name: "mail.hamkaran.cloud" }
+      - { host: "10", name: "taban.pws-dns.net." }
+      - { host: "11", name: "ns93.pws-dns.net." }
+      - { host: "13", name: "zohal.pws-dns.net." }
+      - { host: "14", name: "ns65.pws-dns.net." }
+      - { host: "170", name: "Mail.kian-ph.com." }
+      - { host: "171", name: "Mail.nacco.net." }
+      - { host: "195", name: "secure-mx.appeyk.com." }
+      - { host: "198", name: "mx2.appeyk.com." }
+
+  - name: 209.32.194.in-addr.arpa
+    serial: 20260711209
+    ttl: 86400
+    soa_ns: rdns1.fanhab.ir.
+    soa_email: sh.ghoreishi@fanhab.ir.
+    ns_records:
+      - rdns1.fanhab.ir.
+      - rdns2.fanhab.ir.
+    ptr_records:
