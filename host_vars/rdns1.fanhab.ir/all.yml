@@ -7,13 +7,12 @@
 # Then ansible-vault encrypt this file before committing.
 bind_tsig_key_name: "sync-key"
 bind_tsig_algorithm: "hmac-sha256"
-bind_tsig_secret: "CHANGE_ME_REPLACE_WITH_TSIG_KEYGEN_OUTPUT=="
+bind_tsig_secret: "{{ rdns_secret }}"
 
 # Networks allowed to query these servers (recursion clients / ACL).
 # Restrict this to your real internal ranges.
 bind_allow_query:
-  - "192.168.1.0/24"
-  - "127.0.0.1"
+  - "any"
 
 # Forwarders used for anything outside the zones this pair is authoritative for.
 bind_forwarders:

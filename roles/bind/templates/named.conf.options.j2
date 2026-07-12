@@ -20,7 +20,7 @@ options {
     listen-on-v6 { {{ bind_listen_ipv6 }}; };
 
     // Who can ask for data in zones we're authoritative for.
-    allow-query { {{ bind_allow_query }}; };
+    allow-query { {{ bind_allow_query | join('; ') }}; };
 
 {% if bind_recursion %}
     recursion yes;

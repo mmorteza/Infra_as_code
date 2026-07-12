@@ -1,6 +1,6 @@
 bind_zones:
   - name: fanhab.local
-    serial: 2026070101
+    serial: 1000
     ttl: 86400
     soa_ns: ns1.example.com.
     soa_email: admin.example.com.        # dot instead of @
@@ -14,17 +14,17 @@ bind_zones:
 
 bind_reverse_zones:
   - name: 200.255.134.in-addr.arpa
-    serial: 20260711200
+    serial: 100200
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
     ptr_records:
       - { host: "22", name: "linux-plesk.palizct.com." }
       - { host: "35", name: "alt1-mx.eypars.net." }
-      - { host: "36", name: "mailgateway.eypars.net ." }
+      - { host: "36", name: "mailgateway.eypars.net." }
       - { host: "53", name: "edge-2019.inovintech.ir." }
       - { host: "145", name: "kianpo02mta.datamizban.net." }
       - { host: "146", name: "kianpo01mta.datamizban.net." }
@@ -34,10 +34,10 @@ bind_reverse_zones:
       - { host: "210", name: "mail.pendarnetwork.com." }
   
   - name: 201.255.134.in-addr.arpa
-    serial: 20260711201
+    serial: 100201
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -59,10 +59,10 @@ bind_reverse_zones:
       - { host: "212", name: "mail.ebidar.net." }
   
   - name: 202.255.134.in-addr.arpa
-    serial: 20260711202
+    serial: 100202
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -71,10 +71,10 @@ bind_reverse_zones:
       - { host: "10", name: "mail4.mafpars.com." }
 
   - name: 203.255.134.in-addr.arpa
-    serial: 20260711203
+    serial: 100203
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -85,10 +85,10 @@ bind_reverse_zones:
       - { host: "82", name: "mail.ferfere.com." }
 
   - name: 204.255.134.in-addr.arpa
-    serial: 20260711204
+    serial: 100204
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -96,20 +96,20 @@ bind_reverse_zones:
 
   
   - name: 205.255.134.in-addr.arpa
-    serial: 20260711205
+    serial: 100205
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
     ptr_records:
 
   - name: 206.255.134.in-addr.arpa
-    serial: 20260711206
+    serial: 100206
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -118,20 +118,20 @@ bind_reverse_zones:
       - { host: "206", name: "ns6.fanhab.ir" }
 
   - name: 207.255.134.in-addr.arpa
-    serial: 20260711207
+    serial: 100207
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
     ptr_records:
 
   - name: 168.214.31.in-addr.arpa
-    serial: 20260711168
+    serial: 100168
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -160,10 +160,10 @@ bind_reverse_zones:
       - { host: "215", name: "hod.ir." }
 
   - name: 169.214.31.in-addr.arpa
-    serial: 20260711169
+    serial: 100169
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -188,10 +188,10 @@ bind_reverse_zones:
       - { host: "230", name: "irpdc12.resanehpooneh.com." }
 
   - name: 170.214.31.in-addr.arpa
-    serial: 20260711170
+    serial: 100170
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -203,10 +203,10 @@ bind_reverse_zones:
       - { host: "254", name: "meetbsd.ir." }
 
   - name: 171.214.31.in-addr.arpa
-    serial: 20260711171
+    serial: 100171
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -226,10 +226,10 @@ bind_reverse_zones:
       - { host: "252", name: "mail.ipicb.ir." }
 
   - name: 172.214.31.in-addr.arpa
-    serial: 20260711172
+    serial: 100172
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -242,10 +242,10 @@ bind_reverse_zones:
       - { host: "221", name: "smtp.soitco.com." }
 
   - name: 173.214.31.in-addr.arpa
-    serial: 20260711173
+    serial: 100173
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -263,10 +263,10 @@ bind_reverse_zones:
       - { host: "221", name: "Pavancloud.com." }
 
   - name: 174.214.31.in-addr.arpa
-    serial: 20260711174
+    serial: 100174
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -297,10 +297,10 @@ bind_reverse_zones:
 
 
   - name: 175.214.31.in-addr.arpa
-    serial: 20260711175
+    serial: 100175
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.
@@ -316,10 +316,10 @@ bind_reverse_zones:
       - { host: "198", name: "mx2.appeyk.com." }
 
   - name: 209.32.194.in-addr.arpa
-    serial: 20260711209
+    serial: 100209
     ttl: 86400
     soa_ns: rdns1.fanhab.ir.
-    soa_email: sh.ghoreishi@fanhab.ir.
+    soa_email: admin.fanhab.ir.
     ns_records:
       - rdns1.fanhab.ir.
       - rdns2.fanhab.ir.

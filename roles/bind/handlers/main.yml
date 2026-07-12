@@ -8,3 +8,8 @@
   ansible.builtin.service:
     name: "{{ bind_service }}"
     state: restarted
+
+- name: Reload AppArmor
+  ansible.builtin.service:
+    name: apparmor
+    state: reloaded

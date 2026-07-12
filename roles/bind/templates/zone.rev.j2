@@ -14,8 +14,6 @@ $TTL {{ item.ttl }}
 {% endfor %}
 
 ; PTR records
-{% if ptr_records is defined %}
-{% for rec in item.ptr_records %}
+{% for rec in item.ptr_records | default([], true) %}
 {{ rec.host }}    IN  PTR {{ rec.name }}
 {% endfor %}
-{% endif %}
