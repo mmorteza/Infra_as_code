@@ -7,7 +7,7 @@
     - install.yml
     - tsigkey.yml
 
-- name: Template named.conf.options 
+- name: Config named.conf.options 
   ansible.builtin.template:
     src: named.conf.options.j2
     dest: "{{ bind_named_conf_options }}"
@@ -25,18 +25,28 @@
     group: "{{ bind_named_group }}"
     mode: "0750"
 
-- name: Configure this node as a zone master
+- name: Configure Zones on master Node
   ansible.builtin.include_tasks: master.yml
   when: inventory_hostname in groups['bind_masters']
 
-- name: Configure this node as a zone slave
+- name: Configure Zones on Slave Node
   ansible.builtin.include_tasks: slave.yml
   when: inventory_hostname in groups['bind_slaves']
 
-- name: Template named.conf.local (master or slave zone stanzas, per-host)
+- name: Configure named.conf.local (either master nor slave zone stanzas, per-host)
   ansible.builtin.template:
     src: named.conf.local.j2
     dest: "{{ bind_named_conf_local }}"
+    owner: root
+    group: "{{ bind_named_group }}"
+    mode: "0640"
+    validate: "named-checkconf %s"
+  notify: reload bind
+
+- name: Configure bind logging on named.conf.loggings (either master nor slave zone stanzas, per-host)v
+  ansible.builtin.template:
+    src: named.conf.logging.j2
+    dest: "{{ bind_named_conf_logging }}"
     owner: root
     group: "{{ bind_named_group }}"
     mode: "0640"

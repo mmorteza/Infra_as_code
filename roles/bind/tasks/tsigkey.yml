@@ -1,5 +1,5 @@
 ---
-- name: Template TSIG key file
+- name: Configure and create TSIG key file
   ansible.builtin.template:
     src: tsig.key.j2
     dest: "{{ bind_conf_dir }}/tsig.key"

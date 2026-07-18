@@ -9,13 +9,6 @@
     update_cache: yes
   when: "'nftables' not in ansible_facts.packages"
 
-- name: Ensure nftables is enabled and started
-  systemd:
-    name: nftables
-    state: started
-    enabled: true
-  ignore_errors: true
-
 - name: register status of /etc/nftables.d/
   stat:
     path: /etc/nftables.d/
@@ -26,21 +19,41 @@
     path: /etc/nftables.d
     state: directory
     mode: '0755'
-  when: " not nft_dir.stat.exists"
+  when:
+    - "not nft_dir.stat.exists"
+    - inventory_hostname not in groups['bind_servers']
 
-#- name: Deploy nftables base rules
-#  copy:
-#    src: templates/base.rules.j2
-#    dest: /etc/nftables.d/base.rules
-#    mode: '0644'
-#
-#- name: Deploy nftables SSH access Rules
+- name: register status of /etc/nft/nftables.d/
+  stat:
+    path: /etc/nft/nftables.d/
+  register: nft_rule_dir
+
+- name: Create /etc/nft/nftbales.d
+  file:
+    path: /etc/nft/nftables.d
+    state: directory
+    mode: '0755'
+  when: "not nft_rule_dir.stat.exists"
+
+- name: Deploy new nftables rule format
+  template:
+    src: nft.new.conf.j2
+    dest: /etc/nftables.conf
+  when: inventory_hostname in groups['bind_servers']
+
+- name: Deploy new nftable rules into /etc/nft/nftables.d
+  template:
+    src: nft.rule.conf.j2
+    dest: /etc/nft/nftables.d/50-hardening-basic.rules
+  notify: Reload nftables
+  when: inventory_hostname in groups['bind_servers']
+# - name: Deploy nftables SSH access Rules
 #  copy:
 #    src: templates/ssh.rules.j2
 #    dest: /etc/nftables.d/ssh.rules
 #    mode: '0644'
-#
-#- name: Deploy nftables HTTP rules
+
+# - name: Deploy nftables HTTP rules
 #  copy:
 #    src: templates/http.rules.j2
 #    dest: /etc/nftables.d/http.rules
@@ -52,4 +65,11 @@
     src: nft.conf.j2
     dest: /etc/nftables.conf
   notify: Restart nftables
+  when: inventory_hostname not in groups['bind_servers']
 
+- name: Ensure nftables is enabled and started
+  systemd:
+    name: nftables
+    state: started
+    enabled: true
+  ignore_errors: true

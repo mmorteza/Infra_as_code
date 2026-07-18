@@ -1,35 +1,28 @@
 ---
 input_rules:
+  - ip6 saddr ::1 counter drop
 
-  - rule: ip protocol tcp ct state established counter accept
-    comment: Allow established tcp connection
+  - ip saddr 127.0.0.1/8 counter drop
 
-  - rule: ip protocol udp ct state established counter accept
-    comment: Allow established udp connections
+  - iif "lo" counter accept
 
-  - rule: ip saddr 172.16.3.3/32 tcp dport 22 counter accept
-    comment: Morteza Sadeghi VPN IP
+  - ip protocol tcp ct state established counter accept
 
-  - rule: ip saddr 172.16.3.10/32 tcp dport 22 counter accept
-    comment: shahin ghoreishi VPN IP
+  - ip protocol udp ct state established counter accept
 
-  - rule: ip saddr 192.168.20.69/32 tcp dport 22 counter accept
-    comment: Morteza Sadeghi LAN IP
+  - icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, mld-listener-query, mld-listener-report, mld-listener-done, nd-router-solicit, nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, ind-neighbor-solicit, ind-neighbor-advert, mld2-listener-report } counter accept
 
-  - rule: ip saddr 192.168.20.158/32 tcp dport 22 counter accept
-    comment: SsHAhin ghoreishi LAN IP
+  - icmp type {echo-request} counter accept
 
-  - rule: icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, mld-listener-query, mld-listener-report, mld-listener-reoprt} counter accept
-    comment: Accept icmpv6
+  - udp dport 53 counter accept
 
-  - rule: icmp type {echo} counter accept
-    comment: Accept icmp echo only
+  - ip saddr 172.20.100.103/32 tcp dport 53 counter accept
 
-  - rule: udp dport 53 counter accept
-    comment: allow public dns access
+  - ip saddr {172.16.3.3, 172.16.3.10, 192.168.20.69, 192.168.20.58} tcp dport 22 counter accept
 
-  - rule: counter drop
-    comment: "count dropped packets"
+  - ip protocol igmp counter accept
+
+  - log level info counter drop
 
 output_rules:
   # Allow established and related connections
@@ -40,14 +33,16 @@ output_rules:
   # Allow traffic to the localhost IP address
   - oif "lo" counter accept
 
-  # DHCP client requests
-  - udp dport 67 counter log accept
-  - udp dport 68 counter log accept
-
+  # Allow connection to Splunk DS and Indexer
+  - ip daddr 172.20.15.50 tcp dport {8089,9997} counter accept
+  
   # DNS requests
-  - udp dport 53 counter log accept
+  - ip daddr {172.20.13.1,172.20.13.2,172.20.13.3} udp dport 53 counter accept
   - ip daddr 172.20.100.102/32 tcp dport 53 counter accept
   
+  # Allow TimeSync(NTP)
+  - ip daddr {172.20.51.1, 172.20.51.2} udp dport 123 counter accept
+
   # Block any other connection
   - log level info drop
 

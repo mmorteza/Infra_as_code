@@ -5,5 +5,6 @@ bind_conf_dir: /etc/bind
 bind_zone_dir: /etc/bind/zones
 bind_named_conf_options: /etc/bind/named.conf.options
 bind_named_conf_local: /etc/bind/named.conf.local
+bind_named_conf_logging: /etc/bind/named.conf.logging
 bind_named_user: bind
 bind_named_group: bind
