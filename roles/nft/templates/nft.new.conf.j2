@@ -1,0 +1,6 @@
+# This file is managed by Ansible all manual changed will override
+# /etc/nftables.conf
+flush ruleset
+
+# Load all rules from the nftables.d directory
+include "/etc/nft/nftables.d/*.rules"
